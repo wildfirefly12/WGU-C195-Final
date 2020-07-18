@@ -7,16 +7,16 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="javafx-swt" level="project" />
-    <orderEntry type="library" exported="" name="mssql-jdbc-8.2.2.jre11" level="project" />
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J 8/8.0.15/mysql-connector-java-8.0.15.jar!/" />
+          <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/8.0.21/mysql-connector-java-8.0.21.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" exported="" name="javafx-swt" level="project" />
+    <orderEntry type="library" exported="" name="mssql-jdbc-8.2.2.jre11" level="project" />
   </component>
 </module>

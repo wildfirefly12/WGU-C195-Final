@@ -1,6 +1,8 @@
 package controller;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -13,6 +15,8 @@ import util.DBUser;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
 
 public class AddAppointmentController implements Initializable {
@@ -39,10 +43,10 @@ public class AddAppointmentController implements Initializable {
     private ChoiceBox<String> TypeChoice;
 
     @FXML
-    private ComboBox<LocalTime> StartTimeChoice;
+    private ComboBox<String> StartTimeChoice;
 
     @FXML
-    private ComboBox<LocalTime> EndTimeChoice;
+    private ComboBox<String> EndTimeChoice;
 
     @FXML
     private Button SubmitButton;
@@ -50,8 +54,24 @@ public class AddAppointmentController implements Initializable {
     @FXML
     private Button CancelButton;
 
+    private final DateTimeFormatter time = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+    private ObservableList<String> appointmentTimes = FXCollections.observableArrayList();
+
+    public AddAppointmentController(){
+        //populate list of times
+        LocalTime hour = LocalTime.MIN.plusHours(9);
+        for(int i = 0; i <= 16; i++){
+            appointmentTimes.add(hour.format(time));
+            hour = hour.plusMinutes(30);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        StartTimeChoice.setItems(appointmentTimes);
+        EndTimeChoice.setItems(appointmentTimes);
+
         CancelButton.setOnAction(e -> {
             Stage stage = (Stage) CancelButton.getScene().getWindow();
             stage.close();
@@ -65,8 +85,8 @@ public class AddAppointmentController implements Initializable {
             String local = LocationField.getText();
             String url = URLField.getText();
             LocalDate date = DateField.getValue();
-            LocalTime startTime = StartTimeChoice.getValue();
-            LocalTime endTime = EndTimeChoice.getValue();
+            String startTime = StartTimeChoice.getValue();
+            String endTime = EndTimeChoice.getValue();
             String user = User.getLoggedUser();
 
             Appointment newAppointment = new Appointment(title, description, local, contact, type, url);
