@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -9,6 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+<?import javafx.scene.control.ComboBox?>
 <AnchorPane prefHeight="528.0" prefWidth="526.0" styleClass="gray-background" stylesheets="@../style/PopUp.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddAppointmentController">
    <children>
       <TextField fx:id="TitleField" layoutX="84.0" layoutY="38.0" prefHeight="30.0" prefWidth="397.0" promptText="Title" />
@@ -36,7 +38,7 @@
          </image>
       </ImageView>
       <TextField fx:id="URLField" layoutX="84.0" layoutY="419.0" prefHeight="30.0" prefWidth="397.0" promptText="URL" />
-      <ChoiceBox fx:id="TypeChoice" layoutX="83.0" layoutY="378.0" prefHeight="30.0" prefWidth="397.0" />
+      <ComboBox fx:id="ContactChoice" layoutX="83.0" layoutY="378.0" prefHeight="30.0" prefWidth="397.0" />
       <ImageView fitHeight="87.0" fitWidth="30.0" layoutX="35.0" layoutY="419.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/baseline_link_black_18dp.png" />
@@ -47,8 +49,8 @@
             <Image url="@../assets/baseline_schedule_black_18dp.png" />
          </image>
       </ImageView>
-      <ChoiceBox fx:id="StartTimeChoice" layoutX="84.0" layoutY="119.0" prefHeight="30.0" prefWidth="185.0" />
-      <ChoiceBox fx:id="EndTimeChoice" layoutX="294.0" layoutY="119.0" prefHeight="30.0" prefWidth="185.0" />
+      <ComboBox fx:id="StartTimeChoice" layoutX="84.0" layoutY="119.0" prefHeight="30.0" prefWidth="185.0" />
+      <ComboBox fx:id="EndTimeChoice" layoutX="294.0" layoutY="119.0" prefHeight="30.0" prefWidth="185.0" />
       <ImageView fitHeight="87.0" fitWidth="30.0" layoutX="35.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/baseline_list_black_18dp.png" />
@@ -59,7 +61,7 @@
             <Image url="@../assets/baseline_title_black_18dp.png" />
          </image>
       </ImageView>
-      <ChoiceBox fx:id="TypeChoice1" layoutX="83.0" layoutY="335.0" prefHeight="30.0" prefWidth="397.0" />
+      <ChoiceBox fx:id="TypeChoice" layoutX="83.0" layoutY="335.0" prefHeight="30.0" prefWidth="397.0" />
       <Button fx:id="SubmitButton" layoutX="183.0" layoutY="464.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="106.0" stylesheets="@../style/PopUp.css" text="SUBMIT" />
       <Button fx:id="CancelButton" layoutX="263.0" layoutY="464.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="106.0" stylesheets="@../style/PopUp.css" text="CANCEL" />
    </children>

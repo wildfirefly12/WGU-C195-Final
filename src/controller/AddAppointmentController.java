@@ -30,7 +30,7 @@ public class AddAppointmentController implements Initializable {
     private TextField LocationField;
 
     @FXML
-    private ChoiceBox<String> ContactChoice;
+    private ComboBox<String> ContactChoice;
 
     @FXML
     private TextField URLField;
@@ -39,10 +39,10 @@ public class AddAppointmentController implements Initializable {
     private ChoiceBox<String> TypeChoice;
 
     @FXML
-    private ChoiceBox<LocalTime> StartTimeChoice;
+    private ComboBox<LocalTime> StartTimeChoice;
 
     @FXML
-    private ChoiceBox<LocalTime> EndTimeChoice;
+    private ComboBox<LocalTime> EndTimeChoice;
 
     @FXML
     private Button SubmitButton;
@@ -52,21 +52,23 @@ public class AddAppointmentController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        String title = TitleField.getText();
-        String description = DescriptionText.getText();
-        String contact = ContactChoice.getValue();
-        String type = TypeChoice.getValue();
-        String local = LocationField.getText();
-        String url = URLField.getText();
-        LocalDate date = DateField.getValue();
-        String user = User.getLoggedUser();
-
         CancelButton.setOnAction(e -> {
             Stage stage = (Stage) CancelButton.getScene().getWindow();
             stage.close();
         });
 
         SubmitButton.setOnAction(e -> {
+            String title = TitleField.getText();
+            String description = DescriptionText.getText();
+            String contact = ContactChoice.getValue();
+            String type = TypeChoice.getValue();
+            String local = LocationField.getText();
+            String url = URLField.getText();
+            LocalDate date = DateField.getValue();
+            LocalTime startTime = StartTimeChoice.getValue();
+            LocalTime endTime = EndTimeChoice.getValue();
+            String user = User.getLoggedUser();
+
             Appointment newAppointment = new Appointment(title, description, local, contact, type, url);
             newAppointment.setUserId(DBUser.getUserId(user));
             newAppointment.setCustomerId(DBCustomer.getCustomerId(contact));
