@@ -23,7 +23,7 @@ public class DBAppointment {
             stmt.setInt(2, appointment.getUserId());
             stmt.setString(3, appointment.getTitle());
             stmt.setString(4, appointment.getDescription());
-            stmt.setString(5, appointment.setLocation());
+            stmt.setString(5, appointment.getLocation());
             stmt.setString(6, appointment.getContact());
             stmt.setString(7, appointment.getType());
             stmt.setString(8, appointment.getUrl());
