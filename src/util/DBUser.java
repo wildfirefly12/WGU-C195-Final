@@ -38,7 +38,7 @@ public class DBUser {
     public static int getUserId(String user){
         int userId = 0;
         try {
-            String query = "SELECT * FROM user WHERE userName = ?"; //select statement
+            String query = "SELECT * FROM customer WHERE customerName = ?"; //select statement
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, user);
             ResultSet rs = stmt.executeQuery();

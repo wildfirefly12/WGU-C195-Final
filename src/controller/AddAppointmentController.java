@@ -14,6 +14,7 @@ import util.DBUser;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -88,12 +89,17 @@ public class AddAppointmentController implements Initializable {
             String startTime = StartTimeChoice.getValue();
             String endTime = EndTimeChoice.getValue();
             String user = User.getLoggedUser();
+            LocalDateTime start = LocalDateTime.of(date, LocalTime.parse(startTime, time));
+            LocalDateTime end = LocalDateTime.of(date, LocalTime.parse(endTime, time));
 
             Appointment newAppointment = new Appointment(title, description, local, contact, type, url);
             newAppointment.setUserId(DBUser.getUserId(user));
             newAppointment.setCustomerId(DBCustomer.getCustomerId(contact));
+            newAppointment.setStart(start);
+            newAppointment.setEnd(end);
 
-
+            Stage stage = (Stage) SubmitButton.getScene().getWindow();
+            stage.close();
         });
 
     }
