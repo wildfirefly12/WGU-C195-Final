@@ -1,0 +1,27 @@
+.main-background{
+    -fx-background-color: radial-gradient(focus-angle 45deg, focus-distance 20%, center 50% 50%, radius 60%, #439889, #00695c);
+}
+
+.login-window{
+    -fx-background-color: lightgray;
+    -fx-background-radius: 10px;
+    /*-fx-effect: dropshadow(gaussian, slategray, 2, .5, 5, 5);*/
+}
+
+.login-fields{
+    -fx-pref-width: 80%;
+    -fx-pref-height: 50;
+    -fx-background-insets: 10;
+    -fx-padding: 15;
+}
+
+.login-button{
+    -fx-background-color: #66bb6a;
+    -fx-fit-to-width: true;
+    -fx-pref-height: 50;
+    -fx-background-insets: 10;
+    -fx-padding: 15;
+    -fx-text-fill: white;
+    -fx-font-family: "Tw Cen MT";
+    -fx-font-weight: bolder;
+}

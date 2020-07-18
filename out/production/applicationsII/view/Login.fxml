@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main-background" stylesheets="@../style/Login.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+   <children>
+      <VBox layoutX="175.0" layoutY="33.0" prefHeight="333.0" prefWidth="250.0" styleClass="login-window">
+         <children>
+            <AnchorPane prefHeight="121.0" prefWidth="250.0">
+               <children>
+                  <ImageView fitHeight="82.0" fitWidth="81.0" layoutX="85.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/icons8-calendar-144.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TextField fx:id="UsernameField" prefHeight="41.0" prefWidth="250.0" promptText="Username" styleClass="login-fields">
+               <opaqueInsets>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </opaqueInsets>
+            </TextField>
+            <PasswordField fx:id="PasswordField" promptText="Password" styleClass="login-fields" />
+            <Button fx:id="LoginButton" mnemonicParsing="false" prefWidth="261.0" styleClass="login-button" text="LOGIN" />
+            <Button fx:id="ExitButton" mnemonicParsing="false" prefWidth="261.0" styleClass="login-button" text="EXIT" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

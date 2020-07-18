@@ -1,0 +1,30 @@
+.monthly-calendar{
+    -fx-background-color: lightgray;
+}
+
+.table-view {
+    -fx-background-color: white;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header-background .filler {
+    -fx-background-color: #003d33;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: "Tw Cen MT";
+}
+
+.calendar-buttons{
+    -fx-background-color: #66bb6a;
+    -fx-pref-width: 80;
+    -fx-pref-height: 20;
+    -fx-background-insets: 10;
+    -fx-padding: 15;
+    -fx-text-fill: white;
+    -fx-font-family: "Tw Cen MT";
+    -fx-font-weight: bold;
+}

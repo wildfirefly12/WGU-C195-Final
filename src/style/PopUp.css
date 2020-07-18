@@ -1,0 +1,27 @@
+.gray-background{
+    -fx-background-color: lightgray;
+}
+
+
+.button{
+    -fx-background-color: #66bb6a;
+    -fx-pref-width: 80;
+    -fx-pref-height: 20;
+    -fx-background-insets: 10;
+    -fx-padding: 15;
+    -fx-text-fill: white;
+    -fx-font-family: "Tw Cen MT";
+    -fx-font-weight: bold;
+}
+
+.field{
+    -fx-pref-width: 200;
+    -fx-pref-height: 30;
+    -fx-background-insets: 10;
+    -fx-padding: 15;
+}
+
+.label{
+    -fx-font-weight: bold;
+    -fx-font-family: "Tw Cen MT";
+}
