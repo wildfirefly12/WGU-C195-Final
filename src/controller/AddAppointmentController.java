@@ -12,6 +12,7 @@ import model.User;
 import util.DBCustomer;
 import util.DBUser;
 
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -57,6 +58,7 @@ public class AddAppointmentController implements Initializable {
 
     private final DateTimeFormatter time = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private ObservableList<String> appointmentTimes = FXCollections.observableArrayList();
+    private ObservableList<String> types = FXCollections.observableArrayList();
 
     public AddAppointmentController(){
         //populate list of times
@@ -65,13 +67,19 @@ public class AddAppointmentController implements Initializable {
             appointmentTimes.add(hour.format(time));
             hour = hour.plusMinutes(30);
         }
+
+        //populate list of types
+        types.addAll("Meeting", "Phone call", "Video conference");
+
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        //populate choiceboxes
         StartTimeChoice.setItems(appointmentTimes);
         EndTimeChoice.setItems(appointmentTimes);
+        ContactChoice.setItems(DBCustomer.getContacts());
+        TypeChoice.setItems(types);
 
         CancelButton.setOnAction(e -> {
             Stage stage = (Stage) CancelButton.getScene().getWindow();

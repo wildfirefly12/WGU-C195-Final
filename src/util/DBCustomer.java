@@ -14,6 +14,7 @@ public class DBCustomer {
     //database connection
     private static final Connection conn = DBConnection.openConnection();
     public static ObservableList<Customer> customers = FXCollections.observableArrayList();
+    private static ObservableList<String> contacts = FXCollections.observableArrayList();
     private static int customerId;
 
     //add new customer info
@@ -57,6 +58,22 @@ public class DBCustomer {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ObservableList<String> getContacts(){
+        try {
+            String query = "SELECT * FROM customer"; //select statement
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String customer = rs.getString("customerName");
+                contacts.add(customer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return contacts;
     }
 
     //get customer by id
