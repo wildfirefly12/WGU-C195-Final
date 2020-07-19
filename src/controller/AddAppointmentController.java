@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.User;
+import util.DBAppointment;
 import util.DBCustomer;
 import util.DBUser;
 
@@ -101,10 +102,13 @@ public class AddAppointmentController implements Initializable {
             LocalDateTime end = LocalDateTime.of(date, LocalTime.parse(endTime, time));
 
             Appointment newAppointment = new Appointment(title, description, local, contact, type, url);
-            newAppointment.setUserId(DBUser.getUserId(user));
             newAppointment.setCustomerId(DBCustomer.getCustomerId(contact));
+            newAppointment.setUserId(DBUser.getUserId(user));
             newAppointment.setStart(start);
             newAppointment.setEnd(end);
+
+            DBAppointment.insertAppointment(newAppointment);
+
 
             Stage stage = (Stage) SubmitButton.getScene().getWindow();
             stage.close();
