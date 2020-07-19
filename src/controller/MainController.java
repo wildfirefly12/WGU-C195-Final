@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Customer;
 import util.DBCustomer;
 
@@ -25,13 +26,13 @@ public class MainController implements Initializable {
     private AnchorPane mainRootPane;
 
     @FXML
-    private TableView<?> MonthlyCalendarTable;
+    private TableView<Appointment> MonthlyCalendarTable;
 
     @FXML
-    private TableColumn<?, ?> MondayMonthlyColumn;
+    private TableColumn<Appointment, String> MondayMonthlyColumn;
 
     @FXML
-    private TableColumn<?, ?> TuesdayMonthlyColumn;
+    private TableColumn<, ?> TuesdayMonthlyColumn;
 
     @FXML
     private TableColumn<?, ?> WednesdayMonthlyColumn;
@@ -158,6 +159,8 @@ public class MainController implements Initializable {
                 error.printStackTrace();
             }
         });
+
+
     }
 
     //get selected customer

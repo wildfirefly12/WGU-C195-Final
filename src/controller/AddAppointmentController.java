@@ -101,13 +101,14 @@ public class AddAppointmentController implements Initializable {
             String endTime = EndTimeChoice.getValue();
             String user = User.getLoggedUser();
 
+            LocalDate today = LocalDateTime.now().toLocalDate();
+            int compareDate = date.compareTo(today);
+
             if(!Validation.isFilledOut(title) ||
                     !Validation.isFilledOut(description) ||
                     !Validation.isFilledOut(contact) ||
                     !Validation.isFilledOut(type) ||
                     !Validation.isFilledOut(local) ||
-                    !Validation.isFilledOut(startTime) ||
-                    !Validation.isFilledOut(endTime) ||
                     !Validation.isFilledOut(startTime) ||
                     !Validation.isFilledOut(endTime)
             ){
@@ -117,22 +118,22 @@ public class AddAppointmentController implements Initializable {
                 return;
             }
 
-            LocalDateTime start = LocalDateTime.of(date, LocalTime.parse(startTime, time));
-            LocalDateTime end = LocalDateTime.of(date, LocalTime.parse(endTime, time));
-            LocalDateTime today = LocalDateTime.now();
-            int compareTime = start.compareTo(end);
-
-            if(date.equals(today)){
+            if(compareDate < 0){
                 Alert missingItems = new Alert(Alert.AlertType.ERROR);
                 missingItems.setContentText("Please pick a future date.");
                 missingItems.show();
                 return;
             }
 
+            LocalDateTime start = LocalDateTime.of(date, LocalTime.parse(startTime, time));
+            LocalDateTime end = LocalDateTime.of(date, LocalTime.parse(endTime, time));
+
+            int compareTime = start.compareTo(end);
+
             if(compareTime > 0){
-                Alert missingItems = new Alert(Alert.AlertType.ERROR);
-                missingItems.setContentText("The end time cannot be before the start time.");
-                missingItems.show();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("The end time cannot be before the start time.");
+                alert.show();
                 return;
             }
 
