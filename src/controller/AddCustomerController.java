@@ -65,53 +65,60 @@ public class AddCustomerController implements Initializable {
                 Alert missingItems = new Alert(Alert.AlertType.ERROR);
                 missingItems.setContentText("Please fill out required fields.");
                 missingItems.show();
-            } else if(!Validation.isInt(phone) || !Validation.isPhone(phone)) {
+                return;
+            }
+
+            if(!Validation.isInt(phone) || !Validation.isPhone(phone)) {
                 Alert invalidPhone = new Alert(Alert.AlertType.ERROR);
                 invalidPhone.setContentText("Please enter a valid phone number.");
                 invalidPhone.show();
-            } else if (!Validation.isInt(zipcode) || !Validation.isZipCode(zipcode)){
+                return;
+            }
+
+            if (!Validation.isInt(zipcode) || !Validation.isZipCode(zipcode)){
                 Alert invalidZipCode = new Alert(Alert.AlertType.ERROR);
                 invalidZipCode.setContentText("Please enter a valid zip code.");
                 invalidZipCode.show();
-            } else {
-                //create objects to be passed to insert statements
-                Country selectedCountry = new Country(country);
-                City selectedCity = new City(city);
-                Address selectedAddress = new Address(address, address2, zipcode, phone);
-                Customer selectedCustomer = new Customer(name);
-
-                //check if country already exists, if not add country
-                if(!Validation.countryExists(country)){
-                    DBCountry.insertCountry(selectedCountry);
-                    selectedCountry.setCountryId(DBCountry.getCountryId(country));
-                } else {
-                    selectedCountry.setCountryId(DBCountry.getCountryId(country));
-                }
-
-                //check if city already exists, if not add city
-                if(!Validation.cityExists(city)){
-                    selectedCity.setCountryId(selectedCountry.getCountryId());
-                    DBCity.insertCity(selectedCity);
-                    selectedCity.setCityId(DBCity.getCityId(city));
-                } else {
-                    selectedCity.setCityId(DBCity.getCityId(city));
-                }
-
-                //add address
-                selectedAddress.setCityId(selectedCity.getCityId());
-                DBAddress.insertAddress(selectedAddress);
-                selectedAddress.setAddressId(DBAddress.getAddressId(address));
-
-                //add customer
-                if(!Validation.customerExists(name)){
-                    selectedCustomer.setAddressId(selectedAddress.getAddressId());
-                    DBCustomer.insertCustomer(selectedCustomer);
-                }
-
-                //close window
-                Stage currentWindow = (Stage) SubmitButton.getScene().getWindow();
-                currentWindow.close();
+                return;
             }
+
+            //create objects to be passed to insert statements
+            Country selectedCountry = new Country(country);
+            City selectedCity = new City(city);
+            Address selectedAddress = new Address(address, address2, zipcode, phone);
+            Customer selectedCustomer = new Customer(name);
+
+            //check if country already exists, if not add country
+            if(!Validation.countryExists(country)){
+                DBCountry.insertCountry(selectedCountry);
+                selectedCountry.setCountryId(DBCountry.getCountryId(country));
+            } else {
+                selectedCountry.setCountryId(DBCountry.getCountryId(country));
+            }
+
+            //check if city already exists, if not add city
+            if(!Validation.cityExists(city)){
+                selectedCity.setCountryId(selectedCountry.getCountryId());
+                DBCity.insertCity(selectedCity);
+                selectedCity.setCityId(DBCity.getCityId(city));
+            } else {
+                selectedCity.setCityId(DBCity.getCityId(city));
+            }
+
+            //add address
+            selectedAddress.setCityId(selectedCity.getCityId());
+            DBAddress.insertAddress(selectedAddress);
+            selectedAddress.setAddressId(DBAddress.getAddressId(address));
+
+            //add customer
+            if(!Validation.customerExists(name)){
+                selectedCustomer.setAddressId(selectedAddress.getAddressId());
+                DBCustomer.insertCustomer(selectedCustomer);
+            }
+
+            //close window
+            Stage currentWindow = (Stage) SubmitButton.getScene().getWindow();
+            currentWindow.close();
         });
     }
 
