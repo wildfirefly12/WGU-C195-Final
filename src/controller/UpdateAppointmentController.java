@@ -152,16 +152,14 @@ public class UpdateAppointmentController implements Initializable {
                     newAppointment.setStart(start);
                     newAppointment.setEnd(end);
                 }
-
             }
-
 
             if(compareDate < 0){
                 Alert missingItems = new Alert(Alert.AlertType.ERROR);
                 missingItems.setContentText("Please pick a future date.");
                 missingItems.show();
             } else {
-                newAppointment.set
+
             }
 
             Stage stage = (Stage) SubmitButton.getScene().getWindow();
