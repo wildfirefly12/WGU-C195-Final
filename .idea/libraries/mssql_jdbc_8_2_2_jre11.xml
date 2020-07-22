@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="mssql-jdbc-8.2.2.jre11">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../../utils/sqljdbc_8.2/enu/mssql-jdbc-8.2.2.jre11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../../utils/sqljdbc_8.2/enu/mssql-jdbc-8.2.2.jre13.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../../../utils/sqljdbc_8.2/enu/mssql-jdbc-8.2.2.jre8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/sqljdbc_8.2/enu/mssql-jdbc-8.2.2.jre11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/sqljdbc_8.2/enu/mssql-jdbc-8.2.2.jre13.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/sqljdbc_8.2/enu/mssql-jdbc-8.2.2.jre8.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
