@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     @FXML
-    private AnchorPane mainRootPane;
+    private AnchorPane MainRootPane;
 
     @FXML
     private TableView<Appointment> MonthlyCalendarTable;
@@ -56,6 +56,9 @@ public class MainController implements Initializable {
     private Button WeeklyButton;
 
     @FXML
+    private Button MonthlyButton;
+
+    @FXML
     private TableView<Customer> CustomerTable;
 
     @FXML
@@ -72,6 +75,9 @@ public class MainController implements Initializable {
 
     @FXML
     private Button ExitButton;
+
+    @FXML
+    private AnchorPane CalendarPane;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -147,6 +153,13 @@ public class MainController implements Initializable {
             }
         });
 
+        //load monthly calendar by default
+        try {
+            loadMonthlyCal();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         AddEventButton.setOnAction(e -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/AddAppointment.fxml"));
@@ -176,7 +189,13 @@ public class MainController implements Initializable {
 
     }
 
-
+    //load monthly calendar
+    public void loadMonthlyCal() throws IOException{
+        AnchorPane calendar = FXMLLoader.load(getClass().getClassLoader().getResource("view/MonthlyCalendar.fxml"));
+        calendar.prefHeight(600);
+        calendar.prefWidth(448);
+        CalendarPane.getChildren().setAll(calendar);
+    }
 
     //get selected customer
     private static Customer selectedCustomer;

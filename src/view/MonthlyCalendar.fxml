@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="448.0" prefWidth="600.0" styleClass="gray-background" stylesheets="@../style/Calendars.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MonthlyCalendarController">
+<AnchorPane prefHeight="615.0" prefWidth="824.0" styleClass="gray-background" stylesheets="@../style/Calendars.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MonthlyCalendarController">
    <children>
-      <GridPane gridLinesVisible="true" layoutX="14.0" layoutY="58.0" prefHeight="376.0" prefWidth="573.0" styleClass="white-background">
+      <GridPane fx:id="MonthlyCalendar" gridLinesVisible="true" layoutX="14.0" layoutY="58.0" prefHeight="547.0" prefWidth="798.0" styleClass="white-background">
           <columnConstraints>
               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -31,19 +31,18 @@
             <Insets />
          </opaqueInsets>
       </GridPane>
-      <AnchorPane fx:id="MonthlyCalendar" layoutX="13.0" layoutY="41.0" prefHeight="17.0" prefWidth="575.0" styleClass="dark-teal-background">
+      <AnchorPane layoutX="13.0" layoutY="41.0" prefHeight="17.0" prefWidth="801.0" styleClass="dark-teal-background">
          <children>
-            <Label alignment="CENTER" layoutX="1.0" layoutY="2.0" prefHeight="14.0" prefWidth="82.0" styleClass="week-day" text="SUNDAY" />
-            <Label alignment="CENTER" layoutX="83.0" layoutY="2.0" prefHeight="14.0" prefWidth="82.0" styleClass="week-day" text="MONDAY" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="164.0" layoutY="1.0" prefHeight="14.0" prefWidth="82.0" styleClass="week-day" text="TUESDAY" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="246.0" layoutY="2.0" prefHeight="14.0" prefWidth="82.0" styleClass="week-day" text="WEDNESDAY" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="328.0" layoutY="3.0" prefHeight="14.0" prefWidth="82.0" styleClass="week-day" text="THURSDAY" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="410.0" layoutY="2.0" prefHeight="14.0" prefWidth="82.0" styleClass="week-day" text="FRIDAY" textAlignment="CENTER" />
-            <Label alignment="CENTER" layoutX="492.0" layoutY="2.0" prefHeight="14.0" prefWidth="82.0" styleClass="week-day" text="SATURDAY" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="1.0" layoutY="2.0" prefHeight="14.0" prefWidth="113.0" styleClass="week-day" text="SUNDAY" />
+            <Label alignment="CENTER" layoutX="116.0" layoutY="2.0" prefHeight="14.0" prefWidth="113.0" styleClass="week-day" text="MONDAY" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="230.0" layoutY="1.0" prefHeight="14.0" prefWidth="113.0" styleClass="week-day" text="TUESDAY" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="343.0" layoutY="2.0" prefHeight="14.0" prefWidth="113.0" styleClass="week-day" text="WEDNESDAY" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="457.0" layoutY="1.0" prefHeight="14.0" prefWidth="113.0" styleClass="week-day" text="THURSDAY" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="571.0" layoutY="2.0" prefHeight="14.0" prefWidth="114.0" styleClass="week-day" text="FRIDAY" textAlignment="CENTER" />
+            <Label alignment="CENTER" layoutX="685.0" layoutY="3.0" prefHeight="14.0" prefWidth="115.0" styleClass="week-day" text="SATURDAY" textAlignment="CENTER" />
          </children>
       </AnchorPane>
-      <Label fx:id="MonthName" layoutX="264.0" layoutY="9.0" styleClass="month-text" text="Label" />
       <Button fx:id="PreviousButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" styleClass="navigation-button" text="PREVIOUS" />
-      <Button fx:id="NextButton" layoutX="537.0" layoutY="13.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" styleClass="navigation-button" text="NEXT" />
+      <Button fx:id="NextButton" layoutX="734.0" layoutY="14.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" styleClass="navigation-button" text="NEXT" />
    </children>
 </AnchorPane>

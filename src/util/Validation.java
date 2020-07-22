@@ -46,7 +46,7 @@ public class Validation {
 
     //check if input is null or empty
     public static Boolean isFilledOut(String string){
-        if(string.isEmpty() || string.isBlank()) {
+        if (string.isEmpty() || string.isBlank()) {
             return false;
         } else {
             return true;

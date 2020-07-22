@@ -24,8 +24,8 @@
 
 .navigation-button{
     -fx-background-color: #439889;
-    -fx-pref-width: 50px;
-    -fx-pref-height: 10px;
+    -fx-pref-width: 80px;
+    -fx-pref-height: 20px;
     -fx-text-fill: white;
     -fx-font-family: "Tw Cen MT";
     -fx-font-size: 8px;

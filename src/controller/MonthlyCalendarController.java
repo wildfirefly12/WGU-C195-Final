@@ -2,10 +2,14 @@ package controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.util.Calendar;
@@ -15,7 +19,7 @@ import java.util.ResourceBundle;
 public class MonthlyCalendarController implements Initializable {
 
     @FXML
-    private AnchorPane MonthlyCalendar;
+    private GridPane MonthlyCalendar;
 
     @FXML
     private Button PreviousButton;
@@ -33,7 +37,9 @@ public class MonthlyCalendarController implements Initializable {
     private static int selectedMonth = currentMonth;
 
     private static int dayOfMonth = 1;
+
     private static int maxDay = monthlyCalendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+    private static int dayOfWeek = monthlyCalendar.get(Calendar.DAY_OF_WEEK);
 
     //print out date info for testing
     public static void printCalendar(){
@@ -51,14 +57,40 @@ public class MonthlyCalendarController implements Initializable {
     }
 
     //create day of month fields
-    public static BorderPane setDayPane(int date){
-        BorderPane dayPane = new BorderPane();
+    public static BorderPane createDayPane(int date){
+        BorderPane datePane = new BorderPane();
+
         Label dateLabel = new Label();
-        return dayPane;
+        dateLabel.setText(Integer.toString(date));
+        datePane.setTop(dateLabel);
+        BorderPane.setAlignment(dateLabel, Pos.TOP_RIGHT);
+        Insets insets = new Insets(5);
+        BorderPane.setMargin(dateLabel, insets);
+
+
+
+        return datePane;
+    }
+
+    //add fields to calendar
+    public void setCalendarDates(){
+        int weekOfMonth = 0;
+
+        for(int i = 1; i <= maxDay; i++){
+            monthlyCalendar.set(selectedYear, selectedMonth, dayOfMonth);
+            dayOfWeek = monthlyCalendar.get(Calendar.DAY_OF_WEEK);
+            if(dayOfWeek == 1) {
+                weekOfMonth = weekOfMonth + 1;
+            }
+            MonthlyCalendar.add(createDayPane(dayOfMonth), dayOfWeek - 1, weekOfMonth);
+            dayOfMonth = dayOfMonth + 1;
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        setCalendarDates();
 
 
     }
