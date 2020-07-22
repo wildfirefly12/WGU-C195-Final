@@ -11,9 +11,12 @@
       <library>
         <CLASSES>
           <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/8.0.21/mysql-connector-java-8.0.21.jar!/" />
+          <root url="jar://$APPLICATION_CONFIG_DIR$/jdbc-drivers/MySQL Connector/J 8/8.0.15/mysql-connector-java-8.0.15.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES />
+        <SOURCES>
+          <root url="file://$USER_HOME$/AppData/Roaming/JetBrains" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="library" name="javafx-swt" level="project" />

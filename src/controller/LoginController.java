@@ -51,7 +51,7 @@ public class LoginController implements Initializable {
            String userName = UsernameField.getText();
            String password = PasswordField.getText();
            boolean verified = verifyLogin(userName, password);
-           Locale currentLocale = /*Locale.getDefault();*/new Locale("es");
+           Locale currentLocale = Locale.getDefault();
 
            //if passwords match, open main window
            if(verified){

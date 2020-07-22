@@ -32,7 +32,7 @@ public class MainController implements Initializable {
     private TableColumn<Appointment, String> MondayMonthlyColumn;
 
     @FXML
-    private TableColumn<, ?> TuesdayMonthlyColumn;
+    private TableColumn<?, ?> TuesdayMonthlyColumn;
 
     @FXML
     private TableColumn<?, ?> WednesdayMonthlyColumn;
@@ -160,8 +160,23 @@ public class MainController implements Initializable {
             }
         });
 
+        UpdateEventButton.setOnAction(e -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/UpdateAppointment.fxml"));
+                Parent parent = fxmlLoader.load();
+                Stage newWindow = new Stage();
+                newWindow.initModality(Modality.APPLICATION_MODAL);
+                newWindow.setScene(new Scene(parent));
+                newWindow.show();
+            } catch (IOException error) {
+                error.printStackTrace();
+            }
+        });
+
 
     }
+
+
 
     //get selected customer
     private static Customer selectedCustomer;
