@@ -21,10 +21,10 @@ public class Appointment {
 
     //constructors
     public Appointment(){
-
     }
 
     public Appointment(String title, String  description, String location, String contact, String type, String url){
+
         this.title = title;
         this.description = description;
         this.location = location;

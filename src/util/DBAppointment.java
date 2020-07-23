@@ -4,11 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 
 public class DBAppointment {
@@ -39,9 +38,55 @@ public class DBAppointment {
             stmt.setString(12, appointment.getLastUpdatedBy());
             stmt.executeUpdate();
 
-            appointments.add(appointment);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
+    }
+
+    public static ObservableList<Appointment> getAllAppointments(){
+        try {
+            String getAppointments = "SELECT * FROM appointment";
+            PreparedStatement stmt = conn.prepareStatement(getAppointments);
+            ResultSet rs = stmt.executeQuery(getAppointments);
+
+            while (rs.next()){
+                int appointmentId = rs.getInt("appointmentId");
+                int customerId = rs.getInt("customerId");
+                int userId = rs.getInt("userId");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                String location = rs.getString("location");
+                String contact = rs.getString("contact");
+                String type = rs.getString("type");
+                String url = rs.getString("url");
+                LocalDate startDate = rs.getDate("start").toLocalDate();
+                LocalTime startTime = rs.getTime("start").toLocalTime();
+                LocalDateTime start = startDate.atTime(startTime);
+                LocalDate endDate = rs.getDate("end").toLocalDate();
+                LocalTime endTime = rs.getTime("end").toLocalTime();
+                LocalDateTime end = endDate.atTime(endTime);
+
+                Appointment appointment = new Appointment();
+                appointment.setAppointmentId(appointmentId);
+                appointment.setCustomerId(customerId);
+                appointment.setUserId(userId);
+                appointment.setTitle(title);
+                appointment.setDescription(description);
+                appointment.setLocation(location);
+                appointment.setContact(contact);
+                appointment.setType(type);
+                appointment.setUrl(url);
+                appointment.setStart(start);
+                appointment.setEnd(end);
+
+                appointments.add(appointment);
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return appointments;
     }
 }
