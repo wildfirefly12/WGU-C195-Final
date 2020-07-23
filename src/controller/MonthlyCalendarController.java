@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +19,9 @@ import util.DBAppointment;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.logging.Filter;
+import java.util.stream.Collectors;
+
 
 
 public class MonthlyCalendarController implements Initializable {
@@ -44,11 +49,11 @@ public class MonthlyCalendarController implements Initializable {
     private static int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     private static int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-    private static ListView<Appointment> appointmentListView;
-    public static FilteredList<Appointment> appointmentFilteredList;
+    private ObservableList<Appointment> allAppointments = DBAppointment.getAllAppointments();
+
 
     //create day of month fields
-    public static BorderPane createDayPane(int date){
+    public BorderPane createDayPane(int date){
         BorderPane datePane = new BorderPane();
 
         Label dateLabel = new Label();
@@ -58,15 +63,10 @@ public class MonthlyCalendarController implements Initializable {
         Insets insets = new Insets(5);
         BorderPane.setMargin(dateLabel, insets);
 
-        appointmentFilteredList = new FilteredList<>(DBAppointment.getAllAppointments(), p -> true);
-        appointmentFilteredList.setPredicate(appointment -> {
-            if(appointment.getStart().getDayOfMonth() == date){
-                return true;
-            }
-            return false;
-        });
+        FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(allAppointments, appointment -> appointment.getStart().getDayOfMonth() == date);
 
-        appointmentListView = new ListView<>(appointmentFilteredList);
+        ListView<Appointment> appointmentListView = new ListView<>();
+        appointmentListView.setItems(appointmentFilteredList);
         appointmentListView.setCellFactory(param -> new ListCell<Appointment>() {
             @Override
             protected void updateItem(Appointment appointment, boolean empty){
@@ -79,10 +79,8 @@ public class MonthlyCalendarController implements Initializable {
             }
         });
 
-        appointmentListView.getSelectionModel().selectedItemProperty();
-
+        appointmentListView.getSelectionModel().getSelectedItems();
         datePane.setCenter(appointmentListView);
-
         return datePane;
 
     }
@@ -98,17 +96,13 @@ public class MonthlyCalendarController implements Initializable {
                 weekOfMonth = weekOfMonth + 1;
             }
             MonthlyCalendar.add(createDayPane(dayOfMonth), dayOfWeek - 1, weekOfMonth);
-            System.out.println(appointmentFilteredList);
             dayOfMonth = dayOfMonth + 1;
-
         }
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCalendarDates();
-
 
     }
 
