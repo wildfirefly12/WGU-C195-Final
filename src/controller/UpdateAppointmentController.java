@@ -9,19 +9,15 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Appointment;
 import model.User;
-import util.DBAppointment;
 import util.DBCustomer;
-import util.DBUser;
 import util.Validation;
 
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class UpdateAppointmentController implements Initializable {
@@ -89,82 +85,89 @@ public class UpdateAppointmentController implements Initializable {
             stage.close();
         });
 
-/*        SubmitButton.setOnAction(e -> {
-            String title = TitleField.getText();
-            String description = DescriptionText.getText();
-            String contact = ContactChoice.getValue();
-            String type = TypeChoice.getValue();
-            String local = LocationField.getText();
-            String url = URLField.getText();
-            LocalDate date = DateField.getValue();
-            String startTime = StartTimeChoice.getValue();
-            String endTime = EndTimeChoice.getValue();
+        SubmitButton.setOnAction(e -> {
+            Appointment appointment = MonthlyCalendarController.selectedAppointment;
+            if(appointment == null){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("No appointment is selected.");
+                alert.showAndWait();
+            } else {
+                String title = TitleField.getText();
+                String description = DescriptionText.getText();
+                String contact = ContactChoice.getValue();
+                String type = TypeChoice.getValue();
+                String local = LocationField.getText();
+                String url = URLField.getText();
+                LocalDate date = DateField.getValue();
+                String startTime = StartTimeChoice.getValue();
+                String endTime = EndTimeChoice.getValue();
+                String user = User.getLoggedUser();
 
-            Appointment newAppointment = new Appointment();
-            LocalDateTime start;
-            LocalDateTime end;
-            LocalDate today = LocalDateTime.now().toLocalDate();
-            int compareDate = date.compareTo(today);
-            String user = User.getLoggedUser();
+                LocalDateTime start;
+                LocalDateTime end;
+                LocalDate today = LocalDateTime.now().toLocalDate();
+                int compareDate = date.compareTo(today);
 
-            //update title
-            if(Validation.isFilledOut(title)){
-                newAppointment.setTitle(title);
-            }
 
-            //update description
-            if(Validation.isFilledOut(description)){
-                newAppointment.setDescription(description);
-            }
+                //update title
+                if(Validation.isFilledOut(title)){
+                    appointment.setTitle(title);
+                }
 
-            //update contact/customer id
-            if(Validation.isFilledOut(contact)){
-                newAppointment.setContact(contact);
-                newAppointment.setCustomerId(DBCustomer.getCustomerId(contact));
-            }
+                //update description
+                if(Validation.isFilledOut(description)){
+                    appointment.setDescription(description);
+                }
 
-            //update appointment type
-            if(Validation.isFilledOut(type)){
-                newAppointment.setType(type);
-            }
+                //update contact/customer id
+                if(Validation.isFilledOut(contact)){
+                    appointment.setContact(contact);
+                    appointment.setCustomerId(DBCustomer.getCustomerId(contact));
+                }
 
-            //update location
-            if(Validation.isFilledOut(local)){
-                newAppointment.setLocation(local);
-            }
+                //update appointment type
+                if(Validation.isFilledOut(type)){
+                    appointment.setType(type);
+                }
 
-            //update url
-            if(Validation.isFilledOut(url)){
-                newAppointment.setUrl(url);
-            }
+                //update location
+                if(Validation.isFilledOut(local)){
+                    appointment.setLocation(local);
+                }
 
-            //update start and end times
-            if(Validation.isFilledOut(startTime) || Validation.isFilledOut(endTime)){
-                start = LocalDateTime.of(date, LocalTime.parse(startTime, time));
-                end = LocalDateTime.of(date, LocalTime.parse(endTime, time));
-                int compareTime = start.compareTo(end);
+                //update url
+                if(Validation.isFilledOut(url)){
+                    appointment.setUrl(url);
+                }
 
-                if(compareTime > 0){
+                //update start and end times
+                if(Validation.isFilledOut(startTime) || Validation.isFilledOut(endTime)){
+                    start = LocalDateTime.of(date, LocalTime.parse(startTime, time));
+                    end = LocalDateTime.of(date, LocalTime.parse(endTime, time));
+                    int compareTime = start.compareTo(end);
+
+                    if(compareTime > 0){
+                        Alert missingItems = new Alert(Alert.AlertType.ERROR);
+                        missingItems.setContentText("The end time cannot be before the start time.");
+                        missingItems.show();
+                    } else {
+                        appointment.setStart(start);
+                        appointment.setEnd(end);
+                    }
+                }
+
+                if(compareDate < 0){
                     Alert missingItems = new Alert(Alert.AlertType.ERROR);
-                    missingItems.setContentText("The end time cannot be before the start time.");
+                    missingItems.setContentText("Please pick a future date.");
                     missingItems.show();
                 } else {
-                    newAppointment.setStart(start);
-                    newAppointment.setEnd(end);
+
                 }
-            }
-
-            if(compareDate < 0){
-                Alert missingItems = new Alert(Alert.AlertType.ERROR);
-                missingItems.setContentText("Please pick a future date.");
-                missingItems.show();
-            } else {
-
             }
 
             Stage stage = (Stage) SubmitButton.getScene().getWindow();
             stage.close();
-        });*/
+        });
 
     }
 }

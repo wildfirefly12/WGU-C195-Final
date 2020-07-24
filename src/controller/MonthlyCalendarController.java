@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -52,6 +54,7 @@ public class MonthlyCalendarController implements Initializable {
     private static int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
     private ObservableList<Appointment> allAppointments = DBAppointment.getAllAppointments();
+    public static Appointment selectedAppointment;
 
 
 
@@ -83,7 +86,11 @@ public class MonthlyCalendarController implements Initializable {
             }
         });
 
-        appointmentListView.getSelectionModel().getSelectedItems();
+        //lambda used on event listener
+        appointmentListView.getSelectionModel().selectedItemProperty().addListener((observableValue, appointment, t1) -> {
+            selectedAppointment = appointmentListView.getSelectionModel().getSelectedItem();
+        });
+
         datePane.setCenter(appointmentListView);
         return datePane;
 

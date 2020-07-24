@@ -155,7 +155,7 @@ public class MainController implements Initializable {
             }
         });
 
-/*        UpdateEventButton.setOnAction(e -> {
+        UpdateEventButton.setOnAction(e -> {
 
             if (MonthlyCalendarController.selectedAppointment == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -174,7 +174,7 @@ public class MainController implements Initializable {
                     error.printStackTrace();
                 }
             }
-        });*/
+        });
 
 
     }
