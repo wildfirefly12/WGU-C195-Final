@@ -26,39 +26,6 @@ public class MainController implements Initializable {
     private AnchorPane MainRootPane;
 
     @FXML
-    private TableView<Appointment> MonthlyCalendarTable;
-
-    @FXML
-    private TableColumn<Appointment, String> MondayMonthlyColumn;
-
-    @FXML
-    private TableColumn<?, ?> TuesdayMonthlyColumn;
-
-    @FXML
-    private TableColumn<?, ?> WednesdayMonthlyColumn;
-
-    @FXML
-    private TableColumn<?, ?> ThursdayMonthlyColumn;
-
-    @FXML
-    private TableColumn<?, ?> FridayMonthlyColumn;
-
-    @FXML
-    private Button AddEventButton;
-
-    @FXML
-    private Button DeleteEventButton;
-
-    @FXML
-    private Button UpdateEventButton;
-
-    @FXML
-    private Button WeeklyButton;
-
-    @FXML
-    private Button MonthlyButton;
-
-    @FXML
     private TableView<Customer> CustomerTable;
 
     @FXML
@@ -78,6 +45,21 @@ public class MainController implements Initializable {
 
     @FXML
     private AnchorPane CalendarPane;
+
+    @FXML
+    private Button AddEventButton;
+
+    @FXML
+    private Button DeleteEventButton;
+
+    @FXML
+    private Button UpdateEventButton;
+
+    @FXML
+    private Button WeeklyButton;
+
+    @FXML
+    private Button MonthlyButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -173,18 +155,26 @@ public class MainController implements Initializable {
             }
         });
 
-        UpdateEventButton.setOnAction(e -> {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/UpdateAppointment.fxml"));
-                Parent parent = fxmlLoader.load();
-                Stage newWindow = new Stage();
-                newWindow.initModality(Modality.APPLICATION_MODAL);
-                newWindow.setScene(new Scene(parent));
-                newWindow.show();
-            } catch (IOException error) {
-                error.printStackTrace();
+/*        UpdateEventButton.setOnAction(e -> {
+
+            if (MonthlyCalendarController.selectedAppointment == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("No appointment is selected.");
+                alert.showAndWait();
+            } else {
+                try {
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/UpdateAppointment.fxml"));
+                    Parent parent = fxmlLoader.load();
+                    Stage newWindow = new Stage();
+                    newWindow.initModality(Modality.APPLICATION_MODAL);
+                    newWindow.setTitle("Update Customer");
+                    newWindow.setScene(new Scene(parent));
+                    newWindow.show();
+                } catch (IOException error) {
+                    error.printStackTrace();
+                }
             }
-        });
+        });*/
 
 
     }
@@ -205,5 +195,7 @@ public class MainController implements Initializable {
     public static Customer getSelectedCustomer(){
         return selectedCustomer;
     }
+
+
 
 }

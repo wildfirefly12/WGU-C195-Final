@@ -89,7 +89,7 @@ public class UpdateAppointmentController implements Initializable {
             stage.close();
         });
 
-        SubmitButton.setOnAction(e -> {
+/*        SubmitButton.setOnAction(e -> {
             String title = TitleField.getText();
             String description = DescriptionText.getText();
             String contact = ContactChoice.getValue();
@@ -164,7 +164,7 @@ public class UpdateAppointmentController implements Initializable {
 
             Stage stage = (Stage) SubmitButton.getScene().getWindow();
             stage.close();
-        });
+        });*/
 
     }
 }

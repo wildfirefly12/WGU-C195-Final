@@ -17,6 +17,7 @@ import util.DBAppointment;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 
@@ -32,6 +33,9 @@ public class MonthlyCalendarController implements Initializable {
 
     @FXML
     private Button NextButton;
+
+    @FXML
+    private Label MonthLabel;
 
     //create Calendar
     private static Calendar calendar = Calendar.getInstance();
@@ -50,6 +54,7 @@ public class MonthlyCalendarController implements Initializable {
     private ObservableList<Appointment> allAppointments = DBAppointment.getAllAppointments();
 
 
+
     //create day of month fields
     public BorderPane createDayPane(int date){
         BorderPane datePane = new BorderPane();
@@ -62,7 +67,7 @@ public class MonthlyCalendarController implements Initializable {
         Insets insets = new Insets(5);
         BorderPane.setMargin(dateLabel, insets);
 
-        FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(allAppointments, appointment -> appointment.getStart().getDayOfMonth() == date);
+        FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(allAppointments, appointment -> appointment.getStart().toLocalDate().isEqual(LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate()));
 
         ListView<Appointment> appointmentListView = new ListView<>();
         appointmentListView.setItems(appointmentFilteredList);
