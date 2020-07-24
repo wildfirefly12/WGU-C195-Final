@@ -3,6 +3,7 @@ package util;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
+import model.User;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -35,7 +36,7 @@ public class DBAppointment {
             stmt.setTimestamp(9, Timestamp.valueOf(localStart));
             stmt.setTimestamp(10, Timestamp.valueOf(localEnd));
             stmt.setString(11, appointment.getCreatedBy());
-            stmt.setString(12, appointment.getLastUpdatedBy());
+            stmt.setString(12, User.getLoggedUser());
             stmt.executeUpdate();
 
         } catch (SQLException exception) {
@@ -88,5 +89,34 @@ public class DBAppointment {
         }
 
         return appointments;
+    }
+
+    public static void updateAppointment(Appointment appointment){
+        try {
+            LocalDateTime localStart = appointment.getStart().atZone(ZoneId.systemDefault()).toLocalDateTime();
+            LocalDateTime localEnd = appointment.getEnd().atZone(ZoneId.systemDefault()).toLocalDateTime();
+
+            String query = "UPDATE appointment " +
+                    "SET customerId = ?, userId = ?, title = ?, description = ?, location = ?, contact = ?, type = ?, url = ?, start = ?, end = ?, lastUpdate = NOW(), lastUpdateBy = ? " +
+                    "WHERE appointmentId = ?";
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, appointment.getCustomerId());
+            stmt.setInt(2, appointment.getUserId());
+            stmt.setString(3, appointment.getTitle());
+            stmt.setString(4, appointment.getDescription());
+            stmt.setString(5, appointment.getLocation());
+            stmt.setString(6, appointment.getContact());
+            stmt.setString(7, appointment.getType());
+            stmt.setString(8, appointment.getUrl());
+            stmt.setTimestamp(9, Timestamp.valueOf(localStart));
+            stmt.setTimestamp(10, Timestamp.valueOf(localEnd));
+            stmt.setString(11, User.getLoggedUser());
+            stmt.setInt(12, appointment.getAppointmentId());
+            stmt.executeUpdate();
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 }
