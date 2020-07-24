@@ -89,6 +89,14 @@ public class UpdateAppointmentController implements Initializable {
 
         SubmitButton.setOnAction(e -> {
             Appointment appointment = MonthlyCalendarController.selectedAppointment;
+
+            String title = TitleField.getText();
+            String description = DescriptionText.getText();
+            String contact = ContactChoice.getValue();
+            String type = TypeChoice.getValue();
+            String local = LocationField.getText();
+            String url = URLField.getText();
+
             if(appointment == null){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("No appointment is selected.");
@@ -100,39 +108,33 @@ public class UpdateAppointmentController implements Initializable {
                 LocalDate today = LocalDateTime.now().toLocalDate();
 
                 //update title
-                if(Validation.isFilledOut(TitleField.toString())){
-                    String title = TitleField.getText();
+                if(Validation.isFilledOut(title)){
                     appointment.setTitle(title);
                 }
 
                 //update description
-                if(Validation.isFilledOut(DescriptionText.toString())){
-                    String description = DescriptionText.getText();
+                if(Validation.isFilledOut(description)){
                     appointment.setDescription(description);
                 }
 
                 //update contact/customer id
                 if(ContactChoice.getValue() != null){
-                    String contact = ContactChoice.getValue();
                     appointment.setContact(contact);
                     appointment.setCustomerId(DBCustomer.getCustomerId(contact));
                 }
 
                 //update appointment type
                 if(TypeChoice.getValue() != null){
-                    String type = TypeChoice.getValue();
                     appointment.setType(type);
                 }
 
                 //update location
-                if(Validation.isFilledOut(LocationField.toString())){
-                    String local = LocationField.getText();
+                if(LocationField != null){
                     appointment.setLocation(local);
                 }
 
                 //update url
                 if(Validation.isFilledOut(URLField.toString())){
-                    String url = URLField.getText();
                     appointment.setUrl(url);
                 }
 
@@ -172,6 +174,7 @@ public class UpdateAppointmentController implements Initializable {
                 }
 
                 DBAppointment.updateAppointment(appointment);
+
             }
 
             Stage stage = (Stage) SubmitButton.getScene().getWindow();
