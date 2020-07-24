@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -11,16 +10,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import model.Appointment;
 import util.DBAppointment;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-import java.util.logging.Filter;
-import java.util.stream.Collectors;
 
 
 
@@ -55,6 +53,7 @@ public class MonthlyCalendarController implements Initializable {
     //create day of month fields
     public BorderPane createDayPane(int date){
         BorderPane datePane = new BorderPane();
+        datePane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         Label dateLabel = new Label();
         dateLabel.setText(Integer.toString(date));
@@ -88,6 +87,7 @@ public class MonthlyCalendarController implements Initializable {
     //add fields to calendar
     public void setCalendarDates(){
         int weekOfMonth = 0;
+        MonthlyCalendar.getChildren().clear();
 
         for(int i = 1; i <= maxDay; i++){
             calendar.set(selectedYear, selectedMonth, dayOfMonth);
@@ -98,12 +98,28 @@ public class MonthlyCalendarController implements Initializable {
             MonthlyCalendar.add(createDayPane(dayOfMonth), dayOfWeek - 1, weekOfMonth);
             dayOfMonth = dayOfMonth + 1;
         }
+
+        MonthLabel.setText(new SimpleDateFormat("MMMM").format(calendar.getTime()));
+    }
+
+    public void setMonthForward(){
+        selectedMonth = selectedMonth + 1;
+        dayOfMonth = 1;
+        setCalendarDates();
+    }
+
+    public void setMonthBack(){
+        selectedMonth = selectedMonth - 1;
+        dayOfMonth = 1;
+        setCalendarDates();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCalendarDates();
 
+        NextButton.setOnAction(e -> setMonthForward());
+        PreviousButton.setOnAction(e -> setMonthBack());
     }
 
 
