@@ -1,0 +1,32 @@
+.gray-background{
+    background-color: lightgray;
+}
+
+.white-background{
+    -fx-background-color: white;
+}
+
+.dark-teal-background{
+    -fx-background-color: #003d33;
+}
+
+.week-day{
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-family: "Tw Cen MT";
+}
+.month-text{
+    -fx-text-fill: #003d33;
+    -fx-font-weight: bold;
+    -fx-font-family: "Tw Cen MT";
+    -fx-font-size: 16px;
+}
+
+.navigation-button{
+    -fx-background-color: #439889;
+    -fx-pref-width: 80px;
+    -fx-pref-height: 20px;
+    -fx-text-fill: white;
+    -fx-font-family: "Tw Cen MT";
+    -fx-font-size: 8px;
+}
