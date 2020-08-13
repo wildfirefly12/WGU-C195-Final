@@ -13,7 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import model.Appointment;
 import model.Customer;
 import util.DBCustomer;
 
@@ -60,6 +59,30 @@ public class MainController implements Initializable {
 
     @FXML
     private Button MonthlyButton;
+
+    //load monthly calendar
+    public void loadMonthlyCal() throws IOException{
+        AnchorPane calendar = FXMLLoader.load(getClass().getClassLoader().getResource("view/MonthlyCalendar.fxml"));
+        calendar.prefHeight(600);
+        calendar.prefWidth(448);
+        CalendarPane.getChildren().setAll(calendar);
+    }
+
+    public void loadWeeklyCal() throws IOException{
+        AnchorPane calendar = FXMLLoader.load(getClass().getClassLoader().getResource("view/WeeklyCalendar.fxml"));
+        calendar.prefHeight(600);
+        calendar.prefWidth(448);
+        CalendarPane.getChildren().setAll(calendar);
+    }
+
+    //get selected customer
+    private static Customer selectedCustomer;
+    public static void setSelectedCustomer(Customer selected){
+        selectedCustomer = selected;
+    }
+    public static Customer getSelectedCustomer(){
+        return selectedCustomer;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -142,6 +165,23 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
 
+        MonthlyButton.setOnAction(e -> {
+            try {
+                MonthlyCalendarController.resetMonthlyCalendar();
+                loadMonthlyCal();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
+        WeeklyButton.setOnAction(e -> {
+            try {
+                loadWeeklyCal();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        });
+
         AddEventButton.setOnAction(e -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/AddAppointment.fxml"));
@@ -178,24 +218,4 @@ public class MainController implements Initializable {
 
 
     }
-
-    //load monthly calendar
-    public void loadMonthlyCal() throws IOException{
-        AnchorPane calendar = FXMLLoader.load(getClass().getClassLoader().getResource("view/MonthlyCalendar.fxml"));
-        calendar.prefHeight(600);
-        calendar.prefWidth(448);
-        CalendarPane.getChildren().setAll(calendar);
-    }
-
-    //get selected customer
-    private static Customer selectedCustomer;
-    public static void setSelectedCustomer(Customer selected){
-        selectedCustomer = selected;
-    }
-    public static Customer getSelectedCustomer(){
-        return selectedCustomer;
-    }
-
-
-
 }

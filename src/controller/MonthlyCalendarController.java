@@ -1,7 +1,5 @@
 package controller;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -22,7 +20,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-
 
 
 public class MonthlyCalendarController implements Initializable {
@@ -53,16 +50,19 @@ public class MonthlyCalendarController implements Initializable {
     private static int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     private static int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-    private ObservableList<Appointment> allAppointments = DBAppointment.getAllAppointments();
+    private DBAppointment dbAppointment = new DBAppointment();
+    private ObservableList<Appointment> allAppointments = dbAppointment.getAllAppointments();
     public static Appointment selectedAppointment;
 
 
 
     //create day of month fields
     public BorderPane createDayPane(int date){
+        //create border pane and add to the grid
         BorderPane datePane = new BorderPane();
         datePane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
+        //create date label and add to the grid
         Label dateLabel = new Label();
         dateLabel.setText(Integer.toString(date));
         datePane.setTop(dateLabel);
@@ -70,8 +70,10 @@ public class MonthlyCalendarController implements Initializable {
         Insets insets = new Insets(5);
         BorderPane.setMargin(dateLabel, insets);
 
+        //create filtered list of appointments
         FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(allAppointments, appointment -> appointment.getStart().toLocalDate().isEqual(LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate()));
 
+        //create list view from filtered list
         ListView<Appointment> appointmentListView = new ListView<>();
         appointmentListView.setItems(appointmentFilteredList);
         appointmentListView.setCellFactory(param -> new ListCell<Appointment>() {
@@ -91,6 +93,7 @@ public class MonthlyCalendarController implements Initializable {
             selectedAppointment = appointmentListView.getSelectionModel().getSelectedItem();
         });
 
+        //add appointment list to grid
         datePane.setCenter(appointmentListView);
         return datePane;
 
@@ -100,6 +103,7 @@ public class MonthlyCalendarController implements Initializable {
     public void setCalendarDates(){
         int weekOfMonth = 0;
         MonthlyCalendar.getChildren().clear();
+        MonthLabel.setText(new SimpleDateFormat("MMMM").format(calendar.getTime()).toUpperCase());
 
         for(int i = 1; i <= maxDay; i++){
             calendar.set(selectedYear, selectedMonth, dayOfMonth);
@@ -110,28 +114,46 @@ public class MonthlyCalendarController implements Initializable {
             MonthlyCalendar.add(createDayPane(dayOfMonth), dayOfWeek - 1, weekOfMonth);
             dayOfMonth = dayOfMonth + 1;
         }
+    }
 
-        MonthLabel.setText(new SimpleDateFormat("MMMM").format(calendar.getTime()));
+    public static void resetMonthlyCalendar(){
+        calendar = Calendar.getInstance();
+
+        currentYear = calendar.get(Calendar.YEAR);//get integer value of current year
+        selectedYear = currentYear;
+
+        currentMonth = calendar.get(Calendar.MONTH);//get integer value of current month
+        selectedMonth = currentMonth;
+
+        dayOfMonth = 1;
+
+        maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
     }
 
     public void setMonthForward(){
-        selectedMonth = selectedMonth + 1;
         dayOfMonth = 1;
+        calendar.set(selectedYear, selectedMonth, dayOfMonth);
+        calendar.add(Calendar.MONTH, 1);
+        selectedMonth = calendar.get(Calendar.MONTH);
         setCalendarDates();
     }
 
     public void setMonthBack(){
-        selectedMonth = selectedMonth - 1;
         dayOfMonth = 1;
+        calendar.set(selectedYear, selectedMonth, dayOfMonth);
+        calendar.add(Calendar.MONTH, -1);
+        selectedMonth = calendar.get(Calendar.MONTH);
         setCalendarDates();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setCalendarDates();
-
         NextButton.setOnAction(e -> setMonthForward());
         PreviousButton.setOnAction(e -> setMonthBack());
+
+
     }
 
 
