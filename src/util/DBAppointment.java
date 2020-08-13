@@ -13,7 +13,7 @@ import java.time.ZoneId;
 
 public class DBAppointment {
     private static final Connection conn = DBConnection.openConnection();
-    public static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+    private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
     //add appointment to db
     public static void insertAppointment(Appointment appointment) {
@@ -44,7 +44,7 @@ public class DBAppointment {
         }
     }
 
-    public static ObservableList<Appointment> getAllAppointments(){
+    public ObservableList<Appointment> getAllAppointments(){
         try {
             String getAppointments = "SELECT * FROM appointment";
             PreparedStatement stmt = conn.prepareStatement(getAppointments);
@@ -80,7 +80,7 @@ public class DBAppointment {
                 appointment.setStart(start);
                 appointment.setEnd(end);
 
-                appointments.add(appointment);
+                    appointments.add(appointment);
             }
 
 

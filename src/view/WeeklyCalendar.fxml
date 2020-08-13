@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="617.0" prefWidth="824.0" styleClass="gray-background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WeeklyCalendarController">
+    <children>
+        <GridPane fx:id="MonthlyCalendar" gridLinesVisible="true" layoutX="14.0" layoutY="59.0" prefHeight="537.0" prefWidth="794.0" styleClass="white-background">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="3:00" textAlignment="CENTER" GridPane.rowIndex="12" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="9:30" textAlignment="CENTER" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="12:00" textAlignment="CENTER" GridPane.rowIndex="6" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="1:00" textAlignment="CENTER" GridPane.rowIndex="8" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="11:00" textAlignment="CENTER" GridPane.rowIndex="4" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="10:00" textAlignment="CENTER" GridPane.rowIndex="2" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="2:00" textAlignment="CENTER" GridPane.rowIndex="10" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="4:00" textAlignment="CENTER" GridPane.rowIndex="14" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="9:00" textAlignment="CENTER" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="10:30" textAlignment="CENTER" GridPane.rowIndex="3" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="11:30" textAlignment="CENTER" GridPane.rowIndex="5" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="12:30" textAlignment="CENTER" GridPane.rowIndex="7" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="1:30" textAlignment="CENTER" GridPane.rowIndex="9" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="2:30" textAlignment="CENTER" GridPane.rowIndex="11" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="3:30" textAlignment="CENTER" GridPane.rowIndex="13" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="4:30" textAlignment="CENTER" GridPane.rowIndex="15" />
+         </children>
+        </GridPane>
+        <AnchorPane layoutX="14.0" layoutY="42.0" prefHeight="17.0" prefWidth="794.0" styleClass="dark-teal-background">
+         <children>
+              <Label alignment="CENTER" layoutX="592.0" layoutY="3.0" prefHeight="14.0" prefWidth="103.0" styleClass="week-day" text="FRIDAY" textAlignment="CENTER" />
+         </children></AnchorPane>
+        <Button fx:id="PreviousButton" layoutX="22.0" layoutY="15.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" styleClass="navigation-button" text="PREVIOUS" />
+        <Button fx:id="NextButton" layoutX="725.0" layoutY="15.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" styleClass="navigation-button" text="NEXT" />
+        <Label fx:id="MonthLabel" layoutX="394.0" layoutY="15.0" styleClass="month-text" />
+        <Label alignment="CENTER" layoutX="97.0" layoutY="44.0" prefHeight="14.0" prefWidth="103.0" styleClass="week-day" text="SUNDAY" />
+        <Label alignment="CENTER" layoutX="199.0" layoutY="44.0" prefHeight="14.0" prefWidth="103.0" styleClass="week-day" text="MONDAY" textAlignment="CENTER" />
+        <Label alignment="CENTER" layoutX="301.0" layoutY="44.0" prefHeight="14.0" prefWidth="103.0" styleClass="week-day" text="TUESDAY" textAlignment="CENTER" />
+        <Label alignment="CENTER" layoutX="403.0" layoutY="44.0" prefHeight="14.0" prefWidth="103.0" styleClass="week-day" text="WEDNESDAY" textAlignment="CENTER" />
+        <Label alignment="CENTER" layoutX="505.0" layoutY="44.0" prefHeight="14.0" prefWidth="103.0" styleClass="week-day" text="THURSDAY" textAlignment="CENTER" />
+        <Label alignment="CENTER" layoutX="711.0" layoutY="45.0" prefHeight="14.0" prefWidth="93.0" styleClass="week-day" text="SATURDAY" textAlignment="CENTER" />
+    </children>
+    <stylesheets>
+        <URL value="@../style/Calendars.css" />
+        <URL value="@../style/Main.css" />
+    </stylesheets>
+</AnchorPane>

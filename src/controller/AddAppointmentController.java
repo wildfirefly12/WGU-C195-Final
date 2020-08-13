@@ -14,14 +14,12 @@ import util.DBCustomer;
 import util.DBUser;
 import util.Validation;
 
-import java.lang.reflect.Type;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class AddAppointmentController implements Initializable {
@@ -62,6 +60,7 @@ public class AddAppointmentController implements Initializable {
     private final DateTimeFormatter time = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private ObservableList<String> appointmentTimes = FXCollections.observableArrayList();
     private ObservableList<String> types = FXCollections.observableArrayList();
+    private DBAppointment dbAppointment = new DBAppointment();
 
     public AddAppointmentController(){
         //populate list of times
@@ -142,7 +141,8 @@ public class AddAppointmentController implements Initializable {
             newAppointment.setUserId(DBUser.getUserId(user));
             newAppointment.setStart(start);
             newAppointment.setEnd(end);
-            DBAppointment.insertAppointment(newAppointment);
+            dbAppointment.insertAppointment(newAppointment);
+            dbAppointment.getAllAppointments().add(newAppointment);
 
             Stage stage = (Stage) SubmitButton.getScene().getWindow();
             stage.close();
