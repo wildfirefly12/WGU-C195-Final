@@ -13,7 +13,6 @@ import java.time.ZoneId;
 
 public class DBAppointment {
     private static final Connection conn = DBConnection.openConnection();
-    private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
 
     //add appointment to db
     public static void insertAppointment(Appointment appointment) {
@@ -45,6 +44,8 @@ public class DBAppointment {
     }
 
     public ObservableList<Appointment> getAllAppointments(){
+        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+
         try {
             String getAppointments = "SELECT * FROM appointment";
             PreparedStatement stmt = conn.prepareStatement(getAppointments);
@@ -81,6 +82,57 @@ public class DBAppointment {
                 appointment.setEnd(end);
 
                     appointments.add(appointment);
+            }
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return appointments;
+    }
+
+    public ObservableList<Appointment> getAppointmentsByHour(LocalTime apptStart, LocalDate apptDay){
+        ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+
+        try {
+            String getAppointments = "SELECT * FROM appointment";
+            PreparedStatement stmt = conn.prepareStatement(getAppointments);
+            ResultSet rs = stmt.executeQuery(getAppointments);
+
+            while (rs.next()){
+                int appointmentId = rs.getInt("appointmentId");
+                int customerId = rs.getInt("customerId");
+                int userId = rs.getInt("userId");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                String location = rs.getString("location");
+                String contact = rs.getString("contact");
+                String type = rs.getString("type");
+                String url = rs.getString("url");
+                LocalDate startDate = rs.getDate("start").toLocalDate();
+                LocalTime startTime = rs.getTime("start").toLocalTime();
+                LocalDateTime start = startDate.atTime(startTime);
+                LocalDate endDate = rs.getDate("end").toLocalDate();
+                LocalTime endTime = rs.getTime("end").toLocalTime();
+                LocalDateTime end = endDate.atTime(endTime);
+
+                if (apptStart == startTime && startDate == apptDay) {
+                    Appointment appointment = new Appointment();
+                    appointment.setAppointmentId(appointmentId);
+                    appointment.setCustomerId(customerId);
+                    appointment.setUserId(userId);
+                    appointment.setTitle(title);
+                    appointment.setDescription(description);
+                    appointment.setLocation(location);
+                    appointment.setContact(contact);
+                    appointment.setType(type);
+                    appointment.setUrl(url);
+                    appointment.setStart(start);
+                    appointment.setEnd(end);
+
+                    appointments.add(appointment);
+                }
             }
 
 

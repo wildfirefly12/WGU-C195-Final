@@ -3,7 +3,6 @@ package controller;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -36,16 +35,19 @@ public class WeeklyCalendarController implements Initializable {
     //create Calendar
     private static Calendar calendar = Calendar.getInstance();
 
-    private static int currentYear = calendar.get(Calendar.YEAR);//get integer value of current year
-    private static int selectedYear = currentYear;
+    private int currentYear = calendar.get(Calendar.YEAR);//get integer value of current year
+    private int selectedYear = currentYear;
 
-    private static int currentMonth = calendar.get(Calendar.MONTH);//get integer value of current month
-    private static int selectedMonth = currentMonth;
+    private int currentMonth = calendar.get(Calendar.MONTH);//get integer value of current month
+    private int selectedMonth = currentMonth;
 
-    private static int dayOfMonth = 1;
+    private int currentWeek = calendar.get(Calendar.WEEK_OF_YEAR);
+    private int selectedWeek = currentWeek;
 
-    private static int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
-    private static int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+    private int dayOfMonth = 1;
+
+    private int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+    private int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
     DateTimeFormatter hourFormat = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
 
@@ -56,7 +58,7 @@ public class WeeklyCalendarController implements Initializable {
     public void addHourLabels(){
         LocalTime hour = LocalTime.MIDNIGHT.plusHours(9);
 
-        for(int i = 0; i < 18; i++){
+        for(int i = 1; i < 19; i++){
             Label hourLabel = new Label();
             hourLabel.setText(hour.format(hourFormat));
             hourLabel.setPrefWidth(90);
@@ -65,12 +67,33 @@ public class WeeklyCalendarController implements Initializable {
             WeeklyCalendar.add(hourLabel, 0, i);
 
             hour = hour.plusMinutes(30);
-            System.out.println(hour);
+        }
+    }
+
+    public void addDateLabels(){
+        for(int i = 1; i < 8; i++){
+            int date = dayOfMonth;
+            Label dateLabel = new Label();
+            dateLabel.setText(Integer.toString(date));
+            dateLabel.setPrefWidth(90);
+            dateLabel.setAlignment(Pos.CENTER);
+
+            WeeklyCalendar.add(dateLabel, i, 0);
+
+            date++;
+        }
+    }
+
+    public void addAppointments(){
+        for(int i = 0; i < 7; i++){
+            int dayOfWeek = i + 1;
+
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
          addHourLabels();
+         addDateLabels();
     }
 }
