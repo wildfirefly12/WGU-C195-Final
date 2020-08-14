@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="617.0" prefWidth="824.0" styleClass="gray-background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WeeklyCalendarController">
     <children>
-        <GridPane fx:id="MonthlyCalendar" gridLinesVisible="true" layoutX="14.0" layoutY="59.0" prefHeight="537.0" prefWidth="794.0" styleClass="white-background">
+        <GridPane fx:id="WeeklyCalendar" gridLinesVisible="true" layoutX="14.0" layoutY="59.0" prefHeight="537.0" prefWidth="794.0" styleClass="white-background">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />
@@ -38,25 +38,9 @@
                 <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
-         <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="3:00" textAlignment="CENTER" GridPane.rowIndex="12" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="9:30" textAlignment="CENTER" GridPane.rowIndex="1" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="12:00" textAlignment="CENTER" GridPane.rowIndex="6" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="1:00" textAlignment="CENTER" GridPane.rowIndex="8" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="11:00" textAlignment="CENTER" GridPane.rowIndex="4" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="10:00" textAlignment="CENTER" GridPane.rowIndex="2" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="2:00" textAlignment="CENTER" GridPane.rowIndex="10" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="4:00" textAlignment="CENTER" GridPane.rowIndex="14" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="9:00" textAlignment="CENTER" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="10:30" textAlignment="CENTER" GridPane.rowIndex="3" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="11:30" textAlignment="CENTER" GridPane.rowIndex="5" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="12:30" textAlignment="CENTER" GridPane.rowIndex="7" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="1:30" textAlignment="CENTER" GridPane.rowIndex="9" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="2:30" textAlignment="CENTER" GridPane.rowIndex="11" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="3:30" textAlignment="CENTER" GridPane.rowIndex="13" />
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="83.0" text="4:30" textAlignment="CENTER" GridPane.rowIndex="15" />
-         </children>
         </GridPane>
         <AnchorPane layoutX="14.0" layoutY="42.0" prefHeight="17.0" prefWidth="794.0" styleClass="dark-teal-background">
          <children>
