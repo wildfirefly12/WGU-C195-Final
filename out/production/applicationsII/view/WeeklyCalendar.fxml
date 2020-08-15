@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="617.0" prefWidth="824.0" styleClass="gray-background" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WeeklyCalendarController">
     <children>
-        <GridPane fx:id="WeeklyCalendar" gridLinesVisible="true" layoutX="14.0" layoutY="59.0" prefHeight="537.0" prefWidth="794.0" styleClass="white-background">
+        <GridPane fx:id="WeeklyCalendar" layoutX="14.0" layoutY="59.0" prefHeight="537.0" prefWidth="794.0" styleClass="white-background">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="70.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="90.0" />

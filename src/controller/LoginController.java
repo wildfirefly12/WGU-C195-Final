@@ -67,7 +67,6 @@ public class LoginController implements Initializable {
                    newWindow.show();
                    Stage currentWindow = (Stage) LoginButton.getScene().getWindow();
                    currentWindow.close();
-
                } catch (IOException error) {
                    error.printStackTrace();
                }
