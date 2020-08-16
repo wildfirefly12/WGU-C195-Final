@@ -152,6 +152,9 @@ public class UpdateAppointmentController implements Initializable {
                         missingItems.setContentText("Please pick a future date.");
                         missingItems.show();
                         return;
+                    } else {
+                        appointment.setStart(start);
+                        appointment.setEnd(end);
                     }
                 }
 

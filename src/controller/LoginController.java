@@ -18,8 +18,10 @@ import util.DBUser;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 import static util.DBUser.getUsers;
 import static util.DBUser.users;
@@ -53,6 +55,8 @@ public class LoginController implements Initializable {
            String password = PasswordField.getText();
            boolean verified = verifyLogin(userName, password);
            Locale currentLocale = Locale.getDefault();
+           TimeZone currentTimezone = TimeZone.getDefault();
+           System.out.println(currentTimezone);
 
            //if passwords match, open main window
            if(verified){

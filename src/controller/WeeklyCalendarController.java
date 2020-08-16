@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import model.Appointment;
@@ -17,12 +18,15 @@ import util.DBAppointment;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+
+import static java.lang.StrictMath.ceil;
 
 public class WeeklyCalendarController implements Initializable {
 
@@ -58,8 +62,7 @@ public class WeeklyCalendarController implements Initializable {
 
     DateTimeFormatter hourFormat = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
 
-    private DBAppointment dbAppointment = new DBAppointment();
-    private ObservableList<Appointment> allAppointments = dbAppointment.getAllAppointments();
+    private ObservableList<Appointment> allAppointments = DBAppointment.getAllAppointments();
     public static Appointment selectedAppointment;
 
     public void addHourLabels(){
@@ -80,6 +83,9 @@ public class WeeklyCalendarController implements Initializable {
     public void addDateLabels(){
         MonthLabel.setText(new SimpleDateFormat("MMMM").format(calendar.getTime()).toUpperCase());
 
+        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
+        WeeklyCalendar.setBorder(border);
+
         while (calendar.get(Calendar.DAY_OF_WEEK) > calendar.getFirstDayOfWeek()) {
             calendar.add(Calendar.DATE, -1);
         }
@@ -99,27 +105,32 @@ public class WeeklyCalendarController implements Initializable {
     }
 
     public void addAppointments(){
-        FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(allAppointments, appointment -> appointment.getStart().toLocalDate().isEqual(LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate()));
         LocalTime hour = LocalTime.MIDNIGHT.plusHours(9);
+        FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(allAppointments, a -> a.getStart().toLocalDate().isEqual(LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate()));
 
         for(int i = 1; i < 19; i++){
             LocalTime finalHour = hour;
             FilteredList<Appointment> hourlyAppointments = new FilteredList<>(appointmentFilteredList, a -> a.getStart().toLocalTime().equals(finalHour));
 
-            for(Appointment appointment : hourlyAppointments){
-                BackgroundFill gray = new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY);
+            for(Appointment appt : hourlyAppointments){
+                BackgroundFill gray = new BackgroundFill(Color.TEAL, CornerRadii.EMPTY, Insets.EMPTY);
                 Background appointmentBackground = new Background(gray);
-                Label title = new Label();
-                title.setText(appointment.getTitle());
-                title.setPrefWidth(90);
-                title.setPrefHeight(100);
-                title.setAlignment(Pos.CENTER);
-                title.setBackground(appointmentBackground);
-                int length = appointment.getEnd().getHour() - appointment.getStart().getHour();
+                TextArea appointment = new TextArea();
+                appointment.setText(appt.getTitle());
+                appointment.setPrefWidth(90);
+                appointment.setPrefHeight(100);
+                appointment.setBackground(appointmentBackground);
+                //appointment.setAlignment(Pos.CENTER);
+                appointment.setEditable(false);
+                appointment.setWrapText(true);
+
+                double length = ceil((Duration.between(appt.getStart(), appt.getEnd()).toMinutes()/30));
 
                 System.out.println(length);
 
-                WeeklyCalendar.add(title, i, calendar.get(Calendar.DAY_OF_WEEK), 1, length);
+                WeeklyCalendar.add(appointment, calendar.get(Calendar.DAY_OF_WEEK), i, 1, (int)length);
+
+                appointment.focusedProperty().addListener((obs, oldVal, newVal) -> selectedAppointment = appt);
             }
 
             hour = hour.plusMinutes(30);

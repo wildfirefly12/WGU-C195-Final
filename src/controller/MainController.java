@@ -13,7 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Customer;
+import util.DBAppointment;
 import util.DBCustomer;
 
 import java.io.IOException;
@@ -196,7 +198,6 @@ public class MainController implements Initializable {
         });
 
         UpdateEventButton.setOnAction(e -> {
-
             if (MonthlyCalendarController.selectedAppointment == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("No appointment is selected.");
@@ -214,6 +215,11 @@ public class MainController implements Initializable {
                     error.printStackTrace();
                 }
             }
+        });
+
+        DeleteEventButton.setOnAction(e -> {
+            Appointment appointment = MonthlyCalendarController.selectedAppointment;
+            DBAppointment.deleteAppointment(appointment);
         });
 
 

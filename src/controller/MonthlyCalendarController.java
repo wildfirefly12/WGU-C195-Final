@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -50,11 +51,13 @@ public class MonthlyCalendarController implements Initializable {
     private static int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     private static int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-    private DBAppointment dbAppointment = new DBAppointment();
-    private ObservableList<Appointment> allAppointments = dbAppointment.getAllAppointments();
+    private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
     public static Appointment selectedAppointment;
 
-
+    public void getAppointments(){
+        allAppointments.clear();
+        allAppointments = DBAppointment.getAllAppointments();
+    }
 
     //create day of month fields
     public BorderPane createDayPane(int date){
@@ -149,6 +152,8 @@ public class MonthlyCalendarController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        getAppointments();
+        System.out.println(allAppointments);
         setCalendarDates();
         NextButton.setOnAction(e -> setMonthForward());
         PreviousButton.setOnAction(e -> setMonthBack());

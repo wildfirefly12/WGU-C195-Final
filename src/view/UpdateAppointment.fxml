@@ -31,7 +31,7 @@
          </image>
       </ImageView>
       <TextField fx:id="LocationField" layoutX="84.0" layoutY="295.0" prefHeight="30.0" prefWidth="397.0" promptText="Location" />
-      <ImageView fitHeight="87.0" fitWidth="30.0" layoutX="35.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="87.0" fitWidth="30.0" layoutX="35.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/baseline_supervisor_account_black_18dp.png" />
          </image>
@@ -50,7 +50,7 @@
       </ImageView>
       <ComboBox fx:id="StartTimeChoice" layoutX="84.0" layoutY="119.0" prefHeight="30.0" prefWidth="185.0" promptText="Start" />
       <ComboBox fx:id="EndTimeChoice" layoutX="294.0" layoutY="119.0" prefHeight="30.0" prefWidth="185.0" promptText="End" />
-      <ImageView fitHeight="87.0" fitWidth="30.0" layoutX="35.0" layoutY="378.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="87.0" fitWidth="30.0" layoutX="35.0" layoutY="335.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/baseline_list_black_18dp.png" />
          </image>

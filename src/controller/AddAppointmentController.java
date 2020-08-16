@@ -60,7 +60,6 @@ public class AddAppointmentController implements Initializable {
     private final DateTimeFormatter time = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private ObservableList<String> appointmentTimes = FXCollections.observableArrayList();
     private ObservableList<String> types = FXCollections.observableArrayList();
-    private DBAppointment dbAppointment = new DBAppointment();
 
     public AddAppointmentController(){
         //populate list of times
@@ -141,8 +140,8 @@ public class AddAppointmentController implements Initializable {
             newAppointment.setUserId(DBUser.getUserId(user));
             newAppointment.setStart(start);
             newAppointment.setEnd(end);
-            dbAppointment.insertAppointment(newAppointment);
-            dbAppointment.getAllAppointments().add(newAppointment);
+            DBAppointment.insertAppointment(newAppointment);
+            DBAppointment.getAllAppointments().add(newAppointment);
 
             Stage stage = (Stage) SubmitButton.getScene().getWindow();
             stage.close();
