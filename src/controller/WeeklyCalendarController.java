@@ -1,5 +1,6 @@
 package controller;
 
+import com.mysql.cj.xdevapi.Table;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -8,9 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import model.Appointment;
@@ -18,13 +17,12 @@ import util.DBAppointment;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 import static java.lang.StrictMath.ceil;
 
@@ -120,13 +118,10 @@ public class WeeklyCalendarController implements Initializable {
                 appointment.setPrefWidth(90);
                 appointment.setPrefHeight(100);
                 appointment.setBackground(appointmentBackground);
-                //appointment.setAlignment(Pos.CENTER);
                 appointment.setEditable(false);
                 appointment.setWrapText(true);
 
                 double length = ceil((Duration.between(appt.getStart(), appt.getEnd()).toMinutes()/30));
-
-                System.out.println(length);
 
                 WeeklyCalendar.add(appointment, calendar.get(Calendar.DAY_OF_WEEK), i, 1, (int)length);
 

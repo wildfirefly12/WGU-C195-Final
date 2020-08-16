@@ -55,8 +55,6 @@ public class LoginController implements Initializable {
            String password = PasswordField.getText();
            boolean verified = verifyLogin(userName, password);
            Locale currentLocale = Locale.getDefault();
-           TimeZone currentTimezone = TimeZone.getDefault();
-           System.out.println(currentTimezone);
 
            //if passwords match, open main window
            if(verified){

@@ -88,7 +88,12 @@ public class UpdateAppointmentController implements Initializable {
         });
 
         SubmitButton.setOnAction(e -> {
-            Appointment appointment = MonthlyCalendarController.selectedAppointment;
+            Appointment appointment;
+            if (WeeklyCalendarController.selectedAppointment == null) {
+                appointment = MonthlyCalendarController.selectedAppointment;
+            } else {
+                appointment = WeeklyCalendarController.selectedAppointment;
+            }
 
             String title = TitleField.getText();
             String description = DescriptionText.getText();

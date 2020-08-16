@@ -198,7 +198,7 @@ public class MainController implements Initializable {
         });
 
         UpdateEventButton.setOnAction(e -> {
-            if (MonthlyCalendarController.selectedAppointment == null) {
+            if (MonthlyCalendarController.selectedAppointment == null && WeeklyCalendarController.selectedAppointment == null) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("No appointment is selected.");
                 alert.showAndWait();
@@ -218,7 +218,12 @@ public class MainController implements Initializable {
         });
 
         DeleteEventButton.setOnAction(e -> {
-            Appointment appointment = MonthlyCalendarController.selectedAppointment;
+            Appointment appointment;
+            if (WeeklyCalendarController.selectedAppointment == null) {
+                appointment = MonthlyCalendarController.selectedAppointment;
+            } else {
+                appointment = WeeklyCalendarController.selectedAppointment;
+            }
             DBAppointment.deleteAppointment(appointment);
         });
 
