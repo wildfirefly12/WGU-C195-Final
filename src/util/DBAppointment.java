@@ -143,4 +143,55 @@ public class DBAppointment {
             exception.printStackTrace();
         }
     }
+
+    public static Boolean ifAppointmentExists(LocalDateTime apptStart){
+        Appointment appointment = new Appointment();
+
+        try {
+            String query = "SELECT * FROM appointment" +
+                    " WHERE ? BETWEEN start AND end;";
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery(query);
+
+            stmt.setTimestamp(1, Timestamp.valueOf(apptStart));
+
+            while (rs.next()){
+                int appointmentId = rs.getInt("appointmentId");
+                int customerId = rs.getInt("customerId");
+                int userId = rs.getInt("userId");
+                String title = rs.getString("title");
+                String description = rs.getString("description");
+                String location = rs.getString("location");
+                String contact = rs.getString("contact");
+                String type = rs.getString("type");
+                String url = rs.getString("url");
+                LocalDate startDate = rs.getDate("start").toLocalDate();
+                LocalTime startTime = rs.getTime("start").toLocalTime();
+                LocalDateTime start = startDate.atTime(startTime);
+                LocalDate endDate = rs.getDate("end").toLocalDate();
+                LocalTime endTime = rs.getTime("end").toLocalTime();
+                LocalDateTime end = endDate.atTime(endTime);
+
+                appointment.setAppointmentId(appointmentId);
+                appointment.setCustomerId(customerId);
+                appointment.setUserId(userId);
+                appointment.setTitle(title);
+                appointment.setDescription(description);
+                appointment.setLocation(location);
+                appointment.setContact(contact);
+                appointment.setType(type);
+                appointment.setUrl(url);
+                appointment.setStart(start);
+                appointment.setEnd(end);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        if(appointment != null){
+            return true;
+        }
+        return false;
+    }
+
 }

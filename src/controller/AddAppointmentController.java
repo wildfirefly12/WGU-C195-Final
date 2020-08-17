@@ -135,15 +135,11 @@ public class AddAppointmentController implements Initializable {
                 return;
             }
 
-            for(Appointment a : DBAppointment.getAllAppointments()){
-
-                if(start == a.getStart() || start.compareTo(a.getEnd()) >= 0){
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("Appointments cannot overlap.");
-                    alert.show();
-                    return;
-                }
-
+            if(DBAppointment.ifAppointmentExists(start)){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Appointment cannot overlap another appointment.");
+                alert.show();
+                return;
             }
 
             Appointment newAppointment = new Appointment(title, description, local, contact, type, url);
