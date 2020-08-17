@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,7 +21,10 @@ import util.DBCustomer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+
+import static java.time.LocalDateTime.now;
 
 public class MainController implements Initializable {
     @FXML
@@ -86,8 +90,22 @@ public class MainController implements Initializable {
         return selectedCustomer;
     }
 
+    public static void appointmentAlert(){
+
+        ObservableList<Appointment> allAppointments = DBAppointment.getAllAppointments();
+        for(Appointment a : allAppointments){
+            if (a.getStart().isAfter(now()) && a.getStart().isBefore(now().plusMinutes(15))) {
+                Alert invalidZipCode = new Alert(Alert.AlertType.INFORMATION);
+                invalidZipCode.setContentText("Appointment in 15 minutes.");
+                invalidZipCode.show();
+            }
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        appointmentAlert();
 
         /*ADD CUSTOMER WINDOW*/
         AddCustomerButton.setOnAction(e -> {

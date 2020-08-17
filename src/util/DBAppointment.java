@@ -144,7 +144,7 @@ public class DBAppointment {
         }
     }
 
-    public static Boolean ifAppointmentExists(LocalDateTime apptStart){
+    public static boolean ifAppointmentExists(LocalDateTime apptStart){
         Appointment appointment = new Appointment();
 
         try {
@@ -188,10 +188,10 @@ public class DBAppointment {
             throwables.printStackTrace();
         }
 
-        if(appointment != null){
-            return true;
+        if(appointment.getStart() == null){
+            return false;
         }
-        return false;
+        return true;
     }
 
 }
