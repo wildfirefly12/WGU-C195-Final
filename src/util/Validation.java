@@ -1,6 +1,6 @@
 package util;
 
-import javafx.scene.control.Alert;
+import javafx.collections.ObservableList;
 import model.*;
 
 import java.time.LocalDateTime;
@@ -114,6 +114,22 @@ public class Validation {
                 break;
             }
         }
+        return returnValue;
+    }
+
+    public static Boolean appointmentExists(LocalDateTime start){
+        Boolean returnValue = false;
+        ObservableList<Appointment> allAppointments = DBAppointment.getAllAppointments();
+
+        for(Appointment a : allAppointments){
+            LocalDateTime apptStart = a.getStart();
+            LocalDateTime apptEnd = a.getEnd();
+
+            if(start.isAfter(apptStart) && start.isBefore(apptEnd)){
+                returnValue = true;
+            }
+        }
+
         return returnValue;
     }
 

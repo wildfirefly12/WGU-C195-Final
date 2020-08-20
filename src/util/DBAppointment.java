@@ -64,12 +64,10 @@ public class DBAppointment {
                 String contact = rs.getString("contact");
                 String type = rs.getString("type");
                 String url = rs.getString("url");
-                LocalDate startDate = rs.getDate("start").toLocalDate();
-                LocalTime startTime = rs.getTime("start").toLocalTime();
-                LocalDateTime start = startDate.atTime(startTime);
-                LocalDate endDate = rs.getDate("end").toLocalDate();
-                LocalTime endTime = rs.getTime("end").toLocalTime();
-                LocalDateTime end = endDate.atTime(endTime);
+                Timestamp apptStart = rs.getTimestamp("start");
+                LocalDateTime start = apptStart.toLocalDateTime();
+                Timestamp apptEnd = rs.getTimestamp("end");
+                LocalDateTime end = apptEnd.toLocalDateTime();
 
                 Appointment appointment = new Appointment();
                 appointment.setAppointmentId(appointmentId);
@@ -84,7 +82,7 @@ public class DBAppointment {
                 appointment.setStart(start);
                 appointment.setEnd(end);
 
-                    appointments.add(appointment);
+                appointments.add(appointment);
             }
 
 

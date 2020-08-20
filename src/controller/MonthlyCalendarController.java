@@ -153,7 +153,6 @@ public class MonthlyCalendarController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         getAppointments();
-        System.out.println(allAppointments);
         setCalendarDates();
         NextButton.setOnAction(e -> setMonthForward());
         PreviousButton.setOnAction(e -> setMonthBack());

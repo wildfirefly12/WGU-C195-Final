@@ -135,7 +135,7 @@ public class AddAppointmentController implements Initializable {
                 return;
             }
 
-            if(DBAppointment.ifAppointmentExists(start)){
+            if(Validation.appointmentExists(start)){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setContentText("Appointment cannot overlap another appointment.");
                 alert.show();
