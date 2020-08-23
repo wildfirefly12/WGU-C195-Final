@@ -6,14 +6,13 @@ import model.Appointment;
 import model.User;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.ZoneId;
 
 public class DBAppointment {
     private static final Connection conn = DBConnection.openConnection();
     private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
+    private static ObservableList<Appointment> appointmentsByName = FXCollections.observableArrayList();
 
     //add appointment to db
     public static void insertAppointment(Appointment appointment) {
@@ -142,16 +141,16 @@ public class DBAppointment {
         }
     }
 
-    public static boolean ifAppointmentExists(LocalDateTime apptStart){
-        Appointment appointment = new Appointment();
-
+    public static ObservableList<Appointment> getAppointmentsByCustomer(String name){
+        appointmentsByName.clear();
         try {
-            String query = "SELECT * FROM appointment" +
-                    " WHERE ? BETWEEN start AND end;";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            ResultSet rs = stmt.executeQuery(query);
+            String query = "SELECT * FROM appointment " +
+                    "WHERE contact = ?";
 
-            stmt.setTimestamp(1, Timestamp.valueOf(apptStart));
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, String.valueOf(name));
+
+            ResultSet rs = stmt.executeQuery();
 
             while (rs.next()){
                 int appointmentId = rs.getInt("appointmentId");
@@ -163,13 +162,12 @@ public class DBAppointment {
                 String contact = rs.getString("contact");
                 String type = rs.getString("type");
                 String url = rs.getString("url");
-                LocalDate startDate = rs.getDate("start").toLocalDate();
-                LocalTime startTime = rs.getTime("start").toLocalTime();
-                LocalDateTime start = startDate.atTime(startTime);
-                LocalDate endDate = rs.getDate("end").toLocalDate();
-                LocalTime endTime = rs.getTime("end").toLocalTime();
-                LocalDateTime end = endDate.atTime(endTime);
+                Timestamp apptStart = rs.getTimestamp("start");
+                LocalDateTime start = apptStart.toLocalDateTime();
+                Timestamp apptEnd = rs.getTimestamp("end");
+                LocalDateTime end = apptEnd.toLocalDateTime();
 
+                Appointment appointment = new Appointment();
                 appointment.setAppointmentId(appointmentId);
                 appointment.setCustomerId(customerId);
                 appointment.setUserId(userId);
@@ -181,15 +179,12 @@ public class DBAppointment {
                 appointment.setUrl(url);
                 appointment.setStart(start);
                 appointment.setEnd(end);
+
+                appointmentsByName.add(appointment);
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-        if(appointment.getStart() == null){
-            return false;
-        }
-        return true;
+        return appointmentsByName;
     }
-
 }

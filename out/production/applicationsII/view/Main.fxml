@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="MainRootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="668.0" prefWidth="1111.0" styleClass="monthly-calendar" stylesheets="@../style/Main.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <children>
-       <Button fx:id="AddEventButton" layoutX="577.0" layoutY="3.0" mnemonicParsing="false" styleClass="calendar-buttons" text="ADD" />
-       <Button fx:id="DeleteEventButton" layoutX="717.0" layoutY="3.0" mnemonicParsing="false" styleClass="calendar-buttons" text="DELETE" />
-       <Button fx:id="UpdateEventButton" layoutX="647.0" layoutY="3.0" mnemonicParsing="false" styleClass="calendar-buttons" text="UPDATE" />
-       <Button fx:id="WeeklyButton" layoutY="3.0" mnemonicParsing="false" styleClass="calendar-buttons" text="WEEK" />
+       <Button fx:id="AddEventButton" layoutX="577.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="ADD" />
+       <Button fx:id="DeleteEventButton" layoutX="717.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="DELETE" />
+       <Button fx:id="UpdateEventButton" layoutX="647.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="UPDATE" />
       <AnchorPane prefHeight="668.0" prefWidth="264.0" style="-fx-background-color: a3a3a3;">
          <children>
             <TableView fx:id="CustomerTable" layoutX="8.0" layoutY="40.0" prefHeight="622.0" prefWidth="248.0">
@@ -27,10 +27,11 @@
          </children>
       </AnchorPane>
       <Button fx:id="ExitButton" layoutX="1019.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="EXIT" />
-      <Button fx:id="ReportsButton" layoutX="950.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="REPORTS" />
-      <Button fx:id="MonthlyButton" layoutX="344.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="MONTH" />
+      <Button fx:id="ByMonthButton" layoutX="950.0" layoutY="-1.0" mnemonicParsing="false" prefWidth="129.0" styleClass="calendar-buttons" text="REPORT" />
+      <Button fx:id="MonthlyButton" layoutX="343.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="MONTH" />
       <AnchorPane fx:id="CalendarPane" layoutX="275.0" layoutY="43.0" prefHeight="615.0" prefWidth="824.0" />
       <Button fx:id="WeeklyButton" layoutX="273.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="WEEK" />
-      
+      <ComboBox fx:id="ConsultantChoice" layoutX="425.0" layoutY="9.0" prefWidth="150.0" promptText="Consultants" />
+      <ComboBox fx:id="CustomerChoice" layoutX="799.0" layoutY="9.0" prefWidth="150.0" promptText="Customers" />
    </children>
 </AnchorPane>

@@ -14,14 +14,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.User;
-import util.DBUser;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Time;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.TimeZone;
 
 import static util.DBUser.getUsers;
 import static util.DBUser.users;
@@ -74,10 +71,10 @@ public class LoginController implements Initializable {
                }
            } else { //if passwords don't match print error message
                Alert noMatch = new  Alert(Alert.AlertType.ERROR);
-               if(currentLocale.getLanguage() == "en"){
+               if(currentLocale.getLanguage().equals("en")){
                    noMatch.setContentText("The username and password doesn't match.");
                }
-               if(currentLocale.getLanguage() == "es"){
+               if(currentLocale.getLanguage().equals("es")){
                   noMatch.setContentText("El nombre de usuario y la contraseña no coinciden.");
                }
                noMatch.show();

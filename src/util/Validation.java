@@ -117,7 +117,7 @@ public class Validation {
         return returnValue;
     }
 
-    public static Boolean appointmentExists(LocalDateTime start){
+    public static Boolean appointmentExists(LocalDateTime start, LocalDateTime end){
         Boolean returnValue = false;
         ObservableList<Appointment> allAppointments = DBAppointment.getAllAppointments();
 
@@ -125,7 +125,7 @@ public class Validation {
             LocalDateTime apptStart = a.getStart();
             LocalDateTime apptEnd = a.getEnd();
 
-            if(start.isAfter(apptStart) && start.isBefore(apptEnd)){
+            if(start.isAfter(apptStart) && start.isBefore(apptEnd) || end.isAfter(apptStart) && end.isBefore(apptEnd)){
                 returnValue = true;
             }
         }

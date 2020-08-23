@@ -51,12 +51,15 @@ public class MonthlyCalendarController implements Initializable {
     private static int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     private static int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-    private ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
+    private ObservableList<Appointment> appointments = FXCollections.observableArrayList();
     public static Appointment selectedAppointment;
 
-    public void getAppointments(){
-        allAppointments.clear();
-        allAppointments = DBAppointment.getAllAppointments();
+    public void getAppointments(String choice){
+        if(choice == "Default" || choice == null){
+            appointments = DBAppointment.getAllAppointments();
+        } else {
+            appointments = DBAppointment.getAppointmentsByCustomer(choice);
+        }
     }
 
     //create day of month fields
@@ -74,7 +77,8 @@ public class MonthlyCalendarController implements Initializable {
         BorderPane.setMargin(dateLabel, insets);
 
         //create filtered list of appointments
-        FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(allAppointments, appointment -> appointment.getStart().toLocalDate().isEqual(LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate()));
+        FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(appointments, appointment ->
+                appointment.getStart().toLocalDate().isEqual(LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate()));
 
         //create list view from filtered list
         ListView<Appointment> appointmentListView = new ListView<>();
@@ -152,7 +156,7 @@ public class MonthlyCalendarController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        getAppointments();
+        getAppointments(MainController.getCustomerChoice());
         setCalendarDates();
         NextButton.setOnAction(e -> setMonthForward());
         PreviousButton.setOnAction(e -> setMonthBack());
