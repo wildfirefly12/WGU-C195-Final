@@ -3,6 +3,7 @@ package util;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
+import model.MonthlyReport;
 import model.User;
 
 import java.sql.*;
@@ -13,6 +14,7 @@ public class DBAppointment {
     private static final Connection conn = DBConnection.openConnection();
     private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
     private static ObservableList<Appointment> appointmentsByName = FXCollections.observableArrayList();
+    private static ObservableList<MonthlyReport> monthlyReports = FXCollections.observableArrayList();
 
     //add appointment to db
     public static void insertAppointment(Appointment appointment) {
@@ -186,5 +188,32 @@ public class DBAppointment {
             throwables.printStackTrace();
         }
         return appointmentsByName;
+    }
+
+    public static ObservableList<MonthlyReport> getMonthlyReport(){
+        try {
+            String query = "SELECT DATE_FORMAT(start, '%M') AS month, COUNT(start) AS count " +
+                    "FROM appointment " +
+                    "GROUP BY month;";
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String month = rs.getString("month");
+                int count = rs.getInt("count");
+
+                MonthlyReport monthlyReport = new MonthlyReport();
+                monthlyReport.setMonth(month);
+                monthlyReport.setCount(count);
+
+                monthlyReports.add(monthlyReport);
+            }
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return monthlyReports;
     }
 }
