@@ -3,6 +3,7 @@ package util;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import model.Appointment;
+import model.ConsultantReport;
 import model.MonthlyReport;
 import model.User;
 
@@ -15,6 +16,7 @@ public class DBAppointment {
     private static ObservableList<Appointment> appointments = FXCollections.observableArrayList();
     private static ObservableList<Appointment> appointmentsByName = FXCollections.observableArrayList();
     private static ObservableList<MonthlyReport> monthlyReports = FXCollections.observableArrayList();
+    private static ObservableList<ConsultantReport> consultantReports = FXCollections.observableArrayList();
 
     //add appointment to db
     public static void insertAppointment(Appointment appointment) {
@@ -216,4 +218,35 @@ public class DBAppointment {
 
         return monthlyReports;
     }
+
+    public static ObservableList<ConsultantReport> getConsultantReport(String user){
+        try {
+            String query = "SELECT title, contact, start, end, location " +
+                    "FROM appointment " +
+                    "WHERE createdBy = ?;";
+
+
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, user);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                String title = rs.getString("title");
+                String customer = rs.getString("contact");
+                LocalDateTime start = rs.getTimestamp("start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("end").toLocalDateTime();
+                String location = rs.getString("location");
+
+                ConsultantReport consultantReport = new ConsultantReport(title, customer, start, end, location);
+
+                consultantReports.add(consultantReport);
+            }
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return consultantReports;
+    }
+
 }

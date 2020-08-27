@@ -1,34 +1,56 @@
 package controller;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import model.MonthlyReport;
-import util.DBAppointment;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ReportsController implements Initializable {
 
     @FXML
-    private TableView<MonthlyReport> ReportsTable;
+    private Button ByMonthButton;
 
     @FXML
-    private TableColumn<MonthlyReport, String> MonthColumn;
+    private Button ByConsultantButton;
 
     @FXML
-    private TableColumn<MonthlyReport, String> AppointmentsColumn;
+    private Button ByCustomerButton;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ObservableList<MonthlyReport> monthlyReport = DBAppointment.getMonthlyReport();
-        MonthColumn.setCellValueFactory(new PropertyValueFactory<MonthlyReport, String>("month"));
-        AppointmentsColumn.setCellValueFactory(new PropertyValueFactory<MonthlyReport, String>("moncountth"));
-        ReportsTable.setItems(monthlyReport);
+        ByMonthButton.setOnAction( e -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentsByMonth.fxml"));
+                Parent parent = fxmlLoader.load();
+                Stage newWindow = new Stage();
+                newWindow.initModality(Modality.APPLICATION_MODAL);
+                newWindow.setScene(new Scene(parent));
+                newWindow.show();
+            } catch (IOException error) {
+                error.printStackTrace();
+            }
+        });
+
+        ByConsultantButton.setOnAction( e -> {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/AppointmentsByConsultant.fxml"));
+                Parent parent = fxmlLoader.load();
+                Stage newWindow = new Stage();
+                newWindow.initModality(Modality.APPLICATION_MODAL);
+                newWindow.setScene(new Scene(parent));
+                newWindow.show();
+            } catch (IOException error) {
+                error.printStackTrace();
+            }
+        });
     }
 }

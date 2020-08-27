@@ -27,11 +27,10 @@
          </children>
       </AnchorPane>
       <Button fx:id="ExitButton" layoutX="1019.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="EXIT" />
-      <Button fx:id="ByMonthButton" layoutX="950.0" layoutY="-1.0" mnemonicParsing="false" prefWidth="129.0" styleClass="calendar-buttons" text="REPORT" />
+      <Button fx:id="ReportsButton" layoutX="950.0" layoutY="-1.0" mnemonicParsing="false" prefWidth="129.0" styleClass="calendar-buttons" text="REPORTS" />
       <Button fx:id="MonthlyButton" layoutX="343.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="MONTH" />
       <AnchorPane fx:id="CalendarPane" layoutX="275.0" layoutY="43.0" prefHeight="615.0" prefWidth="824.0" />
       <Button fx:id="WeeklyButton" layoutX="273.0" layoutY="-1.0" mnemonicParsing="false" styleClass="calendar-buttons" text="WEEK" />
-      <ComboBox fx:id="ConsultantChoice" layoutX="425.0" layoutY="9.0" prefWidth="150.0" promptText="Consultants" />
-      <ComboBox fx:id="CustomerChoice" layoutX="799.0" layoutY="9.0" prefWidth="150.0" promptText="Customers" />
+      <ComboBox fx:id="CustomerChoice" layoutX="425.0" layoutY="8.0" prefWidth="150.0" promptText="Customers" />
    </children>
 </AnchorPane>

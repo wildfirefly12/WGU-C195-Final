@@ -2,6 +2,9 @@
     -fx-background-color: lightgray;
 }
 
+.dark-teal-background{
+    -fx-background-color: #003d33;
+}
 
 .button{
     -fx-background-color: #66bb6a;
@@ -16,7 +19,7 @@
 
 .button-large{
     -fx-background-color: #66bb6a;
-    -fx-pref-width: 200;
+    -fx-pref-width: 220;
     -fx-pref-height: 60;
     -fx-background-insets: 10;
     -fx-padding: 15;

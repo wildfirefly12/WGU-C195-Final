@@ -64,10 +64,7 @@ public class MainController implements Initializable {
     private Button MonthlyButton;
 
     @FXML
-    private Button ByMonthButton;
-
-    @FXML
-    private ComboBox<String> ConsultantChoice;
+    private Button ReportsButton;
 
     @FXML
     private ComboBox<String> CustomerChoice;
@@ -211,6 +208,7 @@ public class MainController implements Initializable {
                         e.printStackTrace();
                     }
                 });
+
         MonthlyButton.setOnAction(e -> {
             try {
                 MonthlyCalendarController.resetMonthlyCalendar();
@@ -271,7 +269,7 @@ public class MainController implements Initializable {
             DBAppointment.deleteAppointment(appointment);
         });
 
-        ByMonthButton.setOnAction(e -> {
+        ReportsButton.setOnAction(e -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/Reports.fxml"));
                 Parent parent = fxmlLoader.load();

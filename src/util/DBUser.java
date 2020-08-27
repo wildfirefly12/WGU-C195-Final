@@ -51,4 +51,21 @@ public class DBUser {
         }
         return userId;
     }
+
+    public static ObservableList<String> getUserNames(){
+        ObservableList<String> userNames = FXCollections.observableArrayList();
+        try {
+            stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(allUsersQuery);
+
+            while (rs.next()) {
+                String userName = rs.getString("userName");
+
+                userNames.add(userName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return userNames;
+    }
 }
