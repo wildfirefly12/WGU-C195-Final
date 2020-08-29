@@ -15,10 +15,18 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.User;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static util.DBUser.getUsers;
 import static util.DBUser.users;
@@ -39,6 +47,17 @@ public class LoginController implements Initializable {
     @FXML
     private Button ExitButton;
 
+    private final static Logger logger = Logger.getLogger("UserLog");
+
+    public static void createLog(){
+        try {
+            FileHandler logHandler = new FileHandler("userLog.txt", true);
+            logger.addHandler(logHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -52,11 +71,13 @@ public class LoginController implements Initializable {
            String password = PasswordField.getText();
            boolean verified = verifyLogin(userName, password);
            Locale currentLocale = Locale.getDefault();
+           LocalDateTime now = LocalDateTime.now();
 
            //if passwords match, open main window
            if(verified){
                System.out.println("Login successful");
                User.setLoggedUser(userName);
+               logger.log(Level.INFO,"User " + userName + " login successful: " + now);
                try {
                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("view/Main.fxml"));
                    Parent parent = fxmlLoader.load();
@@ -78,6 +99,7 @@ public class LoginController implements Initializable {
                   noMatch.setContentText("El nombre de usuario y la contraseña no coinciden.");
                }
                noMatch.show();
+               logger.log(Level.INFO,"User " + userName + " login unsuccessful: " + now);
            }
 
         });

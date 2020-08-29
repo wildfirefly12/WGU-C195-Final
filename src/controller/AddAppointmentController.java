@@ -4,7 +4,10 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Appointment;
@@ -14,10 +17,12 @@ import util.DBCustomer;
 import util.DBUser;
 import util.Validation;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ResourceBundle;
@@ -99,9 +104,6 @@ public class AddAppointmentController implements Initializable {
             String endTime = EndTimeChoice.getValue();
             String user = User.getLoggedUser();
 
-            LocalDate today = LocalDateTime.now().toLocalDate();
-            int compareDate = date.compareTo(today);
-
             if(!Validation.isFilledOut(title) ||
                     !Validation.isFilledOut(description) ||
                     !Validation.isFilledOut(contact) ||
@@ -116,10 +118,13 @@ public class AddAppointmentController implements Initializable {
                 return;
             }
 
+            LocalDate today = LocalDateTime.now().toLocalDate();
+            int compareDate = date.compareTo(today);
+
             if(compareDate < 0){
-                Alert missingItems = new Alert(Alert.AlertType.ERROR);
-                missingItems.setContentText("Please pick a future date.");
-                missingItems.show();
+                Alert pastDate = new Alert(Alert.AlertType.ERROR);
+                pastDate.setContentText("Please pick a future date.");
+                pastDate.show();
                 return;
             }
 
@@ -147,8 +152,8 @@ public class AddAppointmentController implements Initializable {
             newAppointment.setUserId(DBUser.getUserId(user));
             newAppointment.setStart(start);
             newAppointment.setEnd(end);
+            newAppointment.setLocation(local);
             DBAppointment.insertAppointment(newAppointment);
-            DBAppointment.getAllAppointments().add(newAppointment);
 
             Stage stage = (Stage) SubmitButton.getScene().getWindow();
             stage.close();

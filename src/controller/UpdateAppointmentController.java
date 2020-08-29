@@ -59,6 +59,8 @@ public class UpdateAppointmentController implements Initializable {
     private final DateTimeFormatter time = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
     private ObservableList<String> appointmentTimes = FXCollections.observableArrayList();
     private ObservableList<String> types = FXCollections.observableArrayList();
+    private Appointment appointment;
+
 
     public UpdateAppointmentController(){
         //populate list of times
@@ -73,10 +75,31 @@ public class UpdateAppointmentController implements Initializable {
 
     }
 
+    public void setFieldPrompts(){
+        if (WeeklyCalendarController.selectedAppointment == null) {
+            appointment = MonthlyCalendarController.selectedAppointment;
+        } else {
+            appointment = WeeklyCalendarController.selectedAppointment;
+        }
+
+        TitleField.setText(appointment.getTitle());
+        DateField.setValue(appointment.getStart().toLocalDate());
+        StartTimeChoice.setValue(appointment.getStart().toLocalTime().toString());
+        EndTimeChoice.setValue(appointment.getEnd().toLocalTime().toString());
+        DescriptionText.setText(appointment.getDescription());
+        LocationField.setText(appointment.getLocation());
+        ContactChoice.setValue(appointment.getContact());
+        TypeChoice.setValue(appointment.getType());
+        URLField.setText(appointment.getUrl());
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //populate choiceboxes
+        //populate text fields
+        setFieldPrompts();
 
+        //populate choiceboxes
         ContactChoice.setItems(DBCustomer.getContacts());
         TypeChoice.setItems(types);
         StartTimeChoice.setItems(appointmentTimes);
@@ -88,12 +111,7 @@ public class UpdateAppointmentController implements Initializable {
         });
 
         SubmitButton.setOnAction(e -> {
-            Appointment appointment;
-            if (WeeklyCalendarController.selectedAppointment == null) {
-                appointment = MonthlyCalendarController.selectedAppointment;
-            } else {
-                appointment = WeeklyCalendarController.selectedAppointment;
-            }
+
 
             String title = TitleField.getText();
             String description = DescriptionText.getText();

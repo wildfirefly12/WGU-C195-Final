@@ -55,14 +55,15 @@ public class AppointmentsByConsultantController implements Initializable {
         UserChoice.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((ObservableValue< ? extends String> observable, String oldValue, String newValue) -> {
+                    consultantReport.clear();
                     consultantReport = DBAppointment.getConsultantReport(newValue);
-                });
 
-        TitleColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, String>("title"));
-        TitleColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, String>("customer"));
-        TitleColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, String>("start"));
-        TitleColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, String>("end"));
-        TitleColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, String>("location"));
-        ReportsTable.setItems(consultantReport);
+                    TitleColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, String>("title"));
+                    CustomerColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, String>("customer"));
+                    StartColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, LocalDateTime>("start"));
+                    EndColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, LocalDateTime>("end"));
+                    LocationColumn.setCellValueFactory(new PropertyValueFactory<ConsultantReport, String>("location"));
+                    ReportsTable.setItems(consultantReport);
+                });
     }
 }

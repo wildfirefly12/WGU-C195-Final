@@ -188,6 +188,7 @@ public class MainController implements Initializable {
 
         //load monthly calendar by default
         try {
+            MonthlyCalendarController.resetMonthlyCalendar();
             loadMonthlyCal();
         } catch (IOException e) {
             e.printStackTrace();
@@ -233,7 +234,9 @@ public class MainController implements Initializable {
                 Stage newWindow = new Stage();
                 newWindow.initModality(Modality.APPLICATION_MODAL);
                 newWindow.setScene(new Scene(parent));
-                newWindow.show();
+                newWindow.showAndWait();
+                MonthlyCalendarController.resetMonthlyCalendar();
+                loadMonthlyCal();
             } catch (IOException error) {
                 error.printStackTrace();
             }
@@ -252,7 +255,9 @@ public class MainController implements Initializable {
                     newWindow.initModality(Modality.APPLICATION_MODAL);
                     newWindow.setTitle("Update Customer");
                     newWindow.setScene(new Scene(parent));
-                    newWindow.show();
+                    newWindow.showAndWait();
+                    MonthlyCalendarController.resetMonthlyCalendar();
+                    loadMonthlyCal();
                 } catch (IOException error) {
                     error.printStackTrace();
                 }

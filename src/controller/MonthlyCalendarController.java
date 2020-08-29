@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 
 public class MonthlyCalendarController implements Initializable {
@@ -46,7 +47,10 @@ public class MonthlyCalendarController implements Initializable {
     private static int currentMonth = calendar.get(Calendar.MONTH);//get integer value of current month
     private static int selectedMonth = currentMonth;
 
-    private static int dayOfMonth = 1;
+    private static int dayOfMonth;
+    public static void setDayOfMonth(int day){
+        dayOfMonth = day;
+    }
 
     private static int maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
     private static int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
@@ -76,9 +80,10 @@ public class MonthlyCalendarController implements Initializable {
         Insets insets = new Insets(5);
         BorderPane.setMargin(dateLabel, insets);
 
-        //create filtered list of appointments
+        //create filtered list of appointments using a lambda expression to simplify it
         FilteredList<Appointment> appointmentFilteredList = new FilteredList<>(appointments, appointment ->
-                appointment.getStart().toLocalDate().isEqual(LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate()));
+                appointment.getStart().toLocalDate().equals(LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate()));
+
 
         //create list view from filtered list
         ListView<Appointment> appointmentListView = new ListView<>();
@@ -113,6 +118,7 @@ public class MonthlyCalendarController implements Initializable {
         MonthLabel.setText(new SimpleDateFormat("MMMM").format(calendar.getTime()).toUpperCase());
 
         for(int i = 1; i <= maxDay; i++){
+
             calendar.set(selectedYear, selectedMonth, dayOfMonth);
             dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
             if(dayOfWeek == 1) {
@@ -121,6 +127,7 @@ public class MonthlyCalendarController implements Initializable {
             MonthlyCalendar.add(createDayPane(dayOfMonth), dayOfWeek - 1, weekOfMonth);
             dayOfMonth = dayOfMonth + 1;
         }
+
     }
 
     public static void resetMonthlyCalendar(){
@@ -132,7 +139,7 @@ public class MonthlyCalendarController implements Initializable {
         currentMonth = calendar.get(Calendar.MONTH);//get integer value of current month
         selectedMonth = currentMonth;
 
-        dayOfMonth = 1;
+        setDayOfMonth(1);
 
         maxDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);

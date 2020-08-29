@@ -4,12 +4,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane prefHeight="234.0" prefWidth="298.0" stylesheets="@../style/PopUp.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsController">
+<AnchorPane prefHeight="177.0" prefWidth="298.0" stylesheets="@../style/PopUp.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportsController">
    <children>
       <Button fx:id="ByMonthButton" layoutX="39.0" layoutY="40.0" mnemonicParsing="false" styleClass="button-large" text="APPOINTMENTS BY MONTH" />
       <HBox prefHeight="25.0" prefWidth="298.0" styleClass="dark-teal-background" />
       <Button fx:id="ByConsultantButton" layoutX="39.0" layoutY="100.0" mnemonicParsing="false" prefWidth="229.0" styleClass="button-large" text="APPOINTMENTS BY CONSULTANT" />
-      <Button fx:id="ByCustomerButton" layoutX="39.0" layoutY="160.0" mnemonicParsing="false" styleClass="button-large" text="APPOINTMENTS BY CUSTOMER" />
    </children>
 </AnchorPane>

@@ -98,6 +98,8 @@ public class DBAppointment {
 
     public static void updateAppointment(Appointment appointment){
         try {
+            appointments.remove(appointment);
+
             LocalDateTime localStart = appointment.getStart().atZone(ZoneId.systemDefault()).toLocalDateTime();
             LocalDateTime localEnd = appointment.getEnd().atZone(ZoneId.systemDefault()).toLocalDateTime();
 
@@ -120,7 +122,6 @@ public class DBAppointment {
             stmt.setInt(12, appointment.getAppointmentId());
             stmt.executeUpdate();
 
-            appointments.remove(appointment);
             appointments.add(appointment);
 
         } catch (SQLException exception) {
